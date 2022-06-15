@@ -6,5 +6,13 @@
     <string name="search_action">Search Tasks</string>
     <string name="delete_tasks">Delete Tasks</string>
     <string name="actions_more">More Actions</string>
+    <string name="typeIcon">Type Icon</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="close_icon">Close Icon</string>
+    <string name="search">Search</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_all_tasks_title">Delete all tasks</string>
+    <string name="delete_all_tasks_message">Are You sure You want to delete all tasks?</string>
 
 </resources>

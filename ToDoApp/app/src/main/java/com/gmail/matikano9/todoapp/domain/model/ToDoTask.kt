@@ -14,7 +14,9 @@ import com.gmail.matikano9.todoapp.R
 import com.gmail.matikano9.todoapp.domain.model.ToDoTask.Companion.TABLE_NAME
 import com.gmail.matikano9.todoapp.presentation.ui.theme.*
 import kotlinx.parcelize.Parcelize
+import java.time.Instant
 import java.time.LocalDateTime
+import java.time.ZoneId
 
 @Parcelize
 @Entity(tableName = TABLE_NAME)
@@ -29,13 +31,19 @@ data class ToDoTask(
     companion object{
         const val TABLE_NAME = "todo_task_tab"
     }
+
+    fun dueLocalDateTime(): LocalDateTime =
+        LocalDateTime.ofInstant(
+            Instant.ofEpochMilli(dueTimeInMillis),
+            ZoneId.systemDefault()
+        )
 }
 
 enum class TaskType(val icon: ImageVector){
      Meeting(Icons.Filled.Person),
-     Call( Icons.Filled.Call),
-     Email( Icons.Filled.Email),
-     Other( Icons.Filled.DateRange),
+     Call(Icons.Filled.Call),
+     Email(Icons.Filled.Email),
+     Other(Icons.Filled.DateRange),
 }
 
 enum class Priority(
@@ -45,5 +53,5 @@ enum class Priority(
     Low(priorityLow),
     Medium(priorityMedium),
     High(priorityHigh),
-    None(onSurface)
+    None(surface)
 }

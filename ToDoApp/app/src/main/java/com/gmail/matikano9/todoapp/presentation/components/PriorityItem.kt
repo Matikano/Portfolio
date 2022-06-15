@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.gmail.matikano9.todoapp.domain.model.Priority
-import com.gmail.matikano9.todoapp.presentation.ui.theme.SPACE_MEDIUM
+import com.gmail.matikano9.todoapp.presentation.ui.theme.SPACE_SMALL
 
 @Composable
 fun PriorityItem(
@@ -25,7 +25,7 @@ fun PriorityItem(
             contentDescription = null,
             tint = priority.color
         )
-        Spacer(modifier = Modifier.width(SPACE_MEDIUM))
+        Spacer(modifier = Modifier.width(SPACE_SMALL))
         Text(text = priority.name.toUpperCase())
     }
 }

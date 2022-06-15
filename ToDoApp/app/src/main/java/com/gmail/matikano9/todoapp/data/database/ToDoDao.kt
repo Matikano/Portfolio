@@ -55,6 +55,7 @@ interface ToDoDao {
                 WHEN priority LIKE 'L%' THEN 1
                 WHEN priority LIKE 'M%' THEN 2
                 WHEN priority LIKE 'H%' THEN 3
+                WHEN priority LIKE 'N%' THEN 4
             END
         """
     )
@@ -69,6 +70,7 @@ interface ToDoDao {
                 WHEN priority LIKE 'H%' THEN 1
                 WHEN priority LIKE 'M%' THEN 2
                 WHEN priority LIKE 'L%' THEN 3
+                WHEN priority LIKE 'N%' THEN 4
             END
         """
     )
