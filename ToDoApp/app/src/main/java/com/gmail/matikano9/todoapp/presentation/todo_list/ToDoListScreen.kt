@@ -12,18 +12,16 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.gmail.matikano9.todoapp.R
-import com.gmail.matikano9.todoapp.presentation.destinations.ToDoTaskScreenDestination
-import com.gmail.matikano9.todoapp.presentation.todo_list.components.DefaultListAppBar
 import com.gmail.matikano9.todoapp.presentation.todo_list.components.ListAppBar
 import com.gmail.matikano9.todoapp.presentation.todo_list.components.ToDoListItem
-import com.gmail.matikano9.todoapp.presentation.ui.theme.PADDING_MEDIUM
-import com.gmail.matikano9.todoapp.presentation.ui.theme.PADDING_SMALL
 import com.gmail.matikano9.todoapp.presentation.ui.theme.PADDING_VERY_SMALL
+import com.gmail.matikano9.todoapp.util.UiEvent
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -36,13 +34,32 @@ fun ToDoListScreen(
 
     val state = viewModel.state
 
+    LaunchedEffect(key1 = true){
+        viewModel.uiEvent.collect{ event ->
+            when(event){
+                is UiEvent.ShowSnackBar ->{
+
+                }
+                is UiEvent.Navigate ->  {
+                    navigator.navigate(event.destination)
+                }
+                else -> Unit
+            }
+        }
+    }
+
     Scaffold(
         topBar = {
-            ListAppBar(viewModel = viewModel)
+            ListAppBar(
+                state,
+                onEvent = { event ->
+                    viewModel.onEvent(event)
+                }
+            )
         },
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                navigator.navigate(ToDoTaskScreenDestination())
+                viewModel.onEvent(ToDoListEvent.OnFabAddClicked)
             }) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -60,10 +77,9 @@ fun ToDoListScreen(
         ){
           items(state.toDoList.size) { i ->
               val toDoTask = state.toDoList[i]
-              ToDoListItem(toDoTask = toDoTask) {
-                  navigator.navigate(ToDoTaskScreenDestination(toDoTask = toDoTask))
+              ToDoListItem(toDoTask = toDoTask) { task ->
+                  viewModel.onEvent(ToDoListEvent.OnToDoTaskClicked(task))
               }
-
           }
         }
     }

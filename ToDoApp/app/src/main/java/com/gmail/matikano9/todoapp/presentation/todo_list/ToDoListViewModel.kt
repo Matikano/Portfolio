@@ -7,9 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gmail.matikano9.todoapp.domain.model.Priority
 import com.gmail.matikano9.todoapp.domain.repository.ToDoRepository
+import com.gmail.matikano9.todoapp.presentation.destinations.ToDoTaskScreenDestination
+import com.gmail.matikano9.todoapp.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,6 +25,10 @@ class ToDoListViewModel @Inject constructor(
     var state by mutableStateOf(ToDoListState())
 
     private var searchJob: Job? = null
+    
+    private val _uiEvent = Channel<UiEvent>()
+    val uiEvent  = _uiEvent.receiveAsFlow()
+    
 
     init{
         getAllTasks()
@@ -89,10 +97,24 @@ class ToDoListViewModel @Inject constructor(
                     }
                 }
             }
+            
+            is ToDoListEvent.OnToDoTaskClicked -> {
+                sendUiEvent(UiEvent.Navigate(ToDoTaskScreenDestination(event.toDoTask)))
+            }
+
+            is ToDoListEvent.OnFabAddClicked -> {
+                sendUiEvent(UiEvent.Navigate(ToDoTaskScreenDestination()))
+            }
         }
 
     }
 
+    private fun sendUiEvent(event: UiEvent){
+        viewModelScope.launch { 
+            _uiEvent.send(event)
+        }
+    }
+    
     private fun getAllTasks() {
         viewModelScope.launch {
             repository.getAllTasks.collect { tasks->

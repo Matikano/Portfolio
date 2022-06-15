@@ -26,6 +26,7 @@ import com.gmail.matikano9.todoapp.domain.model.Priority
 import com.gmail.matikano9.todoapp.presentation.components.DisplayAlertDialog
 import com.gmail.matikano9.todoapp.presentation.components.PriorityItem
 import com.gmail.matikano9.todoapp.presentation.todo_list.ToDoListEvent
+import com.gmail.matikano9.todoapp.presentation.todo_list.ToDoListState
 import com.gmail.matikano9.todoapp.presentation.todo_list.ToDoListViewModel
 import com.gmail.matikano9.todoapp.presentation.ui.theme.SPACE_SMALL
 import com.gmail.matikano9.todoapp.presentation.ui.theme.TOP_APP_BAR_HEIGHT
@@ -34,20 +35,19 @@ import com.gmail.matikano9.todoapp.presentation.ui.theme.ToDoAppTheme
 
 @Composable
 fun ListAppBar(
-    viewModel: ToDoListViewModel
+    state: ToDoListState,
+    onEvent: (ToDoListEvent) -> Unit
 ) {
-    val state = viewModel.state
-
 
     DisplayAlertDialog(
         title = stringResource(id = R.string.delete_all_tasks_title),
         message = stringResource(id = R.string.delete_all_tasks_message),
         openDialog = state.dialogOpen,
         closeDialog = {
-            viewModel.onEvent(ToDoListEvent.OnCloseDialog)
+            onEvent(ToDoListEvent.OnCloseDialog)
         },
         onYesClicked = {
-            viewModel.onEvent(ToDoListEvent.OnDeleteAllTaskConfirmed)
+            onEvent(ToDoListEvent.OnDeleteAllTaskConfirmed)
         }
     )
 
@@ -55,22 +55,22 @@ fun ListAppBar(
         SearchAppBar(
             text = state.searchQuery,
             onTextChange = {
-                newSearchQuery -> viewModel.onEvent(ToDoListEvent.OnSearchQueryChanged(newSearchQuery))
+                newSearchQuery -> onEvent(ToDoListEvent.OnSearchQueryChanged(newSearchQuery))
             },
             onCloseClicked = {
-                viewModel.onEvent(ToDoListEvent.OnCloseActionClicked)
+                onEvent(ToDoListEvent.OnCloseActionClicked)
             }
         )
     } else {
         DefaultListAppBar(
             onSearchClicked = {
-                viewModel.onEvent(ToDoListEvent.OnSearchActionClicked)
+                onEvent(ToDoListEvent.OnSearchActionClicked)
             },
             onSortClicked = { priority ->
-                viewModel.onEvent(ToDoListEvent.OnSortClicked(priority))
+                onEvent(ToDoListEvent.OnSortClicked(priority))
             },
             onDeleteAllClicked = {
-                viewModel.onEvent(ToDoListEvent.OnDeleteAllTasksActionClicked)
+                onEvent(ToDoListEvent.OnDeleteAllTasksActionClicked)
             }
         )
     }

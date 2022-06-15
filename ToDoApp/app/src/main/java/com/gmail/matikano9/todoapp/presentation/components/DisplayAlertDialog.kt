@@ -1,9 +1,11 @@
 package com.gmail.matikano9.todoapp.presentation.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import com.gmail.matikano9.todoapp.R
 
 @Composable
@@ -40,7 +42,16 @@ fun DisplayAlertDialog(
                 }
             },
             dismissButton = {
-                OutlinedButton(onClick = { closeDialog() }) {
+                OutlinedButton(
+                    onClick = {
+                        closeDialog()
+                    },
+                    border = BorderStroke(
+                        1.dp,
+                        MaterialTheme.colors.onSurface,
+                    )
+                )
+                {
                     Text(
                         text = stringResource(id = R.string.cancel),
                         color = MaterialTheme.colors.onSurface,
