@@ -14,4 +14,12 @@ object Constants {
         const val NAV_ARG_TODO_TASK = "toDoTask"
     }
 
+    object Validation {
+        const val TITLE_ERROR = "Title cannot be empty"
+        const val DESCRIPTION_ERROR = "Description cannot be empty"
+        const val DUE_DATE_EMPTY = "Due date cannot be empty"
+        const val DUE_DATE_INVALID = "Please enter valid date"
+        const val DUE_TIME_EMPTY = "Due time cannot be empty"
+    }
+
 }

@@ -17,7 +17,9 @@ private val DarkColorPalette = lightColors(
     background = background,
     onBackground = onBackground,
     surface = primaryLight,
-    onSurface = onSurface
+    onSurface = onSurface,
+
+    error = error
 )
 
 @Composable

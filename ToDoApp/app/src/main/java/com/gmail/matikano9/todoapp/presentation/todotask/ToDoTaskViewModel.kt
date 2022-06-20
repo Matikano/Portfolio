@@ -4,18 +4,26 @@ import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gmail.matikano9.todoapp.R
 import com.gmail.matikano9.todoapp.domain.model.ToDoTask
 import com.gmail.matikano9.todoapp.domain.repository.ToDoRepository
 import com.gmail.matikano9.todoapp.util.Constants.Navigation.NAV_ARG_TODO_TASK
+import com.gmail.matikano9.todoapp.util.Constants.Validation.DESCRIPTION_ERROR
+import com.gmail.matikano9.todoapp.util.Constants.Validation.DUE_DATE_EMPTY
+import com.gmail.matikano9.todoapp.util.Constants.Validation.DUE_DATE_INVALID
+import com.gmail.matikano9.todoapp.util.Constants.Validation.DUE_TIME_EMPTY
+import com.gmail.matikano9.todoapp.util.Constants.Validation.TITLE_ERROR
 import com.gmail.matikano9.todoapp.util.Extensions.toMillis
 import com.gmail.matikano9.todoapp.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.inject.Inject
 
@@ -119,8 +127,66 @@ class ToDoTaskViewModel  @Inject constructor(
     }
 
     private fun validateFields(): Boolean {
-        //TODO: implement fields validation
-        return true
+        validateTitle()
+        validateDescription()
+        validateDate()
+        validateTime()
+        return state.titleError == null &&
+                state.descriptionError == null &&
+                state.dueDateError == null &&
+                state.dueTimeError == null
+    }
+
+    private fun validateTitle() {
+        state = if(state.title.isBlank() || state.title.isEmpty()){
+            state.copy(
+                titleError = TITLE_ERROR
+            )
+        } else {
+            state.copy(
+                titleError = null
+            )
+        }
+    }
+
+    private fun validateDescription() {
+        state = if(state.description.isBlank() || state.description.isEmpty()){
+            state.copy(
+                descriptionError = DESCRIPTION_ERROR
+            )
+        } else {
+            state.copy(
+                descriptionError = null
+            )
+        }
+    }
+
+    private fun validateDate() {
+        state = if(state.dueDateString.isBlank() || state.dueDateString.isEmpty()) {
+            state.copy(
+                dueDateError = DUE_DATE_EMPTY
+            )
+        } else if (state.dueDate!!.isBefore(LocalDate.now())) {
+            state.copy(
+                dueDateError = DUE_DATE_INVALID
+            )
+        } else {
+            state.copy(
+                dueDateError = null
+            )
+        }
+    }
+
+    private fun validateTime() {
+        state = if(state.dueTimeString.isBlank() || state.dueTimeString.isEmpty()){
+            state.copy(
+                dueTimeError = DUE_TIME_EMPTY
+            )
+        } else {
+            state.copy(
+                dueTimeError = null
+            )
+        }
     }
 
     private fun sendUiEvent(event: UiEvent){

@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.2.0] - 2022-06-20
+
+### Added
+* Added validation functionality in ToDoTaskViewModel
+* Added new color value for validation errors
+* Added some string constants for validation error messages
+* Added ValidationErrorText composable for reusability in any form validation case
+
+### Changed
+* Adjusted ToDoTaskState to store validation errorMessages
+
 ## [0.1.3] - 2022-06-20
 ### Changed
 * Bugfix for adding new task functionality

@@ -8,16 +8,19 @@ import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.magnifier
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -25,10 +28,7 @@ import com.gmail.matikano9.todoapp.R
 import com.gmail.matikano9.todoapp.domain.model.Priority
 import com.gmail.matikano9.todoapp.domain.model.ToDoTask
 import com.gmail.matikano9.todoapp.presentation.components.PriorityItem
-import com.gmail.matikano9.todoapp.presentation.todotask.components.PriorityDropDown
-import com.gmail.matikano9.todoapp.presentation.todotask.components.ToDoTaskAppBar
-import com.gmail.matikano9.todoapp.presentation.todotask.components.ToDoTaskTextField
-import com.gmail.matikano9.todoapp.presentation.todotask.components.TypeDropDown
+import com.gmail.matikano9.todoapp.presentation.todotask.components.*
 import com.gmail.matikano9.todoapp.presentation.ui.theme.*
 import com.gmail.matikano9.todoapp.util.Extensions.toDateString
 import com.gmail.matikano9.todoapp.util.UiEvent
@@ -108,8 +108,6 @@ fun ToDoTaskContent(
             .padding(PADDING_MEDIUM)
             .fillMaxSize()
     ) {
-
-
         ToDoTaskTextField(
             value = state.title,
             label = stringResource(id = R.string.title),
@@ -117,6 +115,13 @@ fun ToDoTaskContent(
                 title -> onEvent(ToDoTaskEvent.OnTitleChanged(title))
             }
         )
+        if(state.titleError != null){
+            ValidationErrorText(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                errorText = state.titleError
+            )
+        }
         Spacer(modifier = Modifier.height(SPACE_MEDIUM))
         ToDoTaskTextField(
             value = state.description,
@@ -127,6 +132,13 @@ fun ToDoTaskContent(
             singleLine = false,
             maxLines = 2
         )
+        if(state.descriptionError != null){
+            ValidationErrorText(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                errorText = state.descriptionError
+            )
+        }
         Spacer(modifier = Modifier.height(SPACE_MEDIUM))
         PriorityDropDown(
             priority = state.priority,
@@ -140,7 +152,9 @@ fun ToDoTaskContent(
         Spacer(modifier = Modifier.height(SPACE_MEDIUM))
         Row(
             modifier = Modifier
-            .fillMaxWidth()
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.Top
+
         ) {
 
             val calendar = Calendar.getInstance()
@@ -173,7 +187,6 @@ fun ToDoTaskContent(
 
                 }, hour, minute, true
             )
-
             ToDoTaskTextField(
                 modifier = Modifier
                     .weight(1f)
@@ -182,35 +195,36 @@ fun ToDoTaskContent(
                 label = stringResource(id = R.string.dueDate),
                 onTextChanged = { dueDateString ->
                     onEvent(ToDoTaskEvent.OnDueDateChanged(
-                            LocalDate.parse(dueDateString)
-                        )
+                        LocalDate.parse(dueDateString)
+                    )
                     )
                 },
                 singleLine = true,
                 leadingIcon = {
-                   IconButton(
-                       onClick = {
-                           datePickerDialog.show()
-                       }
-                   ) {
-                       Icon(
-                           imageVector = Icons.Default.CalendarToday,
-                           contentDescription = null
-                       )
-                   }
+                    IconButton(
+                        onClick = {
+                            datePickerDialog.show()
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.CalendarToday,
+                            contentDescription = null
+                        )
+                    }
                 }
             )
+
             Spacer(modifier = Modifier.width(SPACE_MEDIUM))
             ToDoTaskTextField(
                 modifier = Modifier
                     .weight(1f)
-                    .clickable(enabled = false){},
+                    .clickable(enabled = false) {},
                 value = state.dueTimeString,
                 label = stringResource(id = R.string.dueTime),
                 onTextChanged = { dueTimeString ->
                     onEvent(ToDoTaskEvent.OnDueTimeChanged(
-                            LocalTime.parse(dueTimeString)
-                        )
+                        LocalTime.parse(dueTimeString)
+                    )
                     )
                 },
                 singleLine = true,
@@ -225,10 +239,33 @@ fun ToDoTaskContent(
                             contentDescription = null
                         )
                     }
-
                 }
             )
-        }
 
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            if(state.dueDateError != null){
+                ValidationErrorText(
+                    modifier = Modifier
+                        .weight(1f),
+                    errorText = state.dueDateError
+                )
+            } else{
+                Spacer(modifier = Modifier.weight(1f))
+            }
+            Spacer(modifier = Modifier.width(SPACE_MEDIUM))
+            if(state.dueTimeError != null){
+                ValidationErrorText(
+                    modifier = Modifier
+                        .weight(1f),
+                    errorText = state.dueTimeError
+                )
+            } else{
+                Spacer(modifier = Modifier.weight(1f))
+            }
+        }
     }
 }

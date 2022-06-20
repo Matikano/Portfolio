@@ -20,3 +20,5 @@ val textWhite = Color(0xFFEEEEEE)
 val priorityLow = Color(0xFF2e7d32)
 val priorityMedium = Color(0xFFf57f17)
 val priorityHigh = Color(0xFFb71c1c)
+
+val error = Color(0xFFFF1744)
