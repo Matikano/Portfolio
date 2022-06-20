@@ -14,5 +14,17 @@
     <string name="cancel">Cancel</string>
     <string name="delete_all_tasks_title">Delete all tasks</string>
     <string name="delete_all_tasks_message">Are You sure You want to delete all tasks?</string>
+    <string name="navigate_back">Navigate Back</string>
+    <string name="action_add_edit">Add/Edit Action</string>
+    <string name="delete_task">Delete Task</string>
+    <string name="delete_task_dialog">Delete %1$s?</string>
+    <string name="delete_task_message">Are you sure you want to delete %1$s?</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="priority">Priority</string>
+    <string name="priorityDropdown">Priority Dropdown</string>
+    <string name="type">Type</string>
+    <string name="dueTime">Due Time</string>
+    <string name="dueDate">Due Date</string>
 
 </resources>

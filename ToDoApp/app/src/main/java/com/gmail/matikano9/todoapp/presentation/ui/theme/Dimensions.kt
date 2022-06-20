@@ -2,6 +2,10 @@ package com.gmail.matikano9.todoapp.presentation.ui.theme
 
 import androidx.compose.ui.unit.dp
 
+val CORNER_SHAPE_VERY_SMALL = 4.dp
+val CORNER_SHAPE_SMALL = 8.dp
+val CORNER_SHAPE_MEDIUM = 16.dp
+
 val PADDING_VERY_SMALL = 4.dp
 val PADDING_SMALL = 8.dp
 val PADDING_MEDIUM = 16.dp

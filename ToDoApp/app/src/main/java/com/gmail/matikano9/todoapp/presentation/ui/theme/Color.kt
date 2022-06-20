@@ -7,8 +7,8 @@ val primary = Color(0xFF424242)
 val primaryDark = Color(0xFF1b1b1b)
 val onPrimary = Color(0xFFEEEEEE)
 
-val secondary = Color(0xFF4a148c)
-val onSecondary = Color(0xFFF5F5F5)
+val secondary = Color(0xFF64dd17)
+val onSecondary = Color(0xFF000000)
 
 val background = Color(0xFF424242)
 val onBackground = Color(0xFFEEEEEE)

@@ -1,6 +1,7 @@
 package com.gmail.matikano9.todoapp.presentation.todo_list
 
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -23,9 +24,12 @@ import com.gmail.matikano9.todoapp.presentation.todo_list.components.ToDoListIte
 import com.gmail.matikano9.todoapp.presentation.ui.theme.PADDING_VERY_SMALL
 import com.gmail.matikano9.todoapp.util.UiEvent
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@Destination(start = true)
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@RootNavGraph(start = true)
+@Destination
 @Composable
 fun ToDoListScreen(
     navigator: DestinationsNavigator,
@@ -43,6 +47,7 @@ fun ToDoListScreen(
                 is UiEvent.Navigate ->  {
                     navigator.navigate(event.destination)
                 }
+
                 else -> Unit
             }
         }

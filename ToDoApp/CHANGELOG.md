@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.1.2] - 2022-06-16 - 2022-06-20
+### Added
+* ToDoTaskScreen with all necessary classes - ToDoTaskEvent, ToDoTaskState, ToDoTaskViewModel
+  Only TextInputfields validation is missing
+* Component composable functions for ToDoTaskScreen: TypeItem, PriorityDropDown, TypeDropDown, ToDoTaskAppBars, ToDoTaskTextField, 
+* Extension functions for LocalDate and LocalTime types which returns their String representation in given format (gathered from Constants object)
+* String resources for constant values in Composables
+
+
+### Changed
+* Adjusted some constant values for Colors and Diemnsions
+* Updated compose version from 1.1.1 to 1.2.0-rc01
+* Updated kotlin version from 1.6.10 to 1.6.21
+* Updated ksp plugin version from 1.6.10-1.0.2 to 1.6.21-1.0.6
+* Updated sdk version from 31 to 32
+* Updated Compose Navigatin Destinations library version from 1.5.9-beta to 1.6.12-beta
+
 ## [0.1.1] - 2022-06-15
 ### Added
 * UiEvent seald class that holds all relevenat and widely used UiEvents for all screens across the app (events like PopBackStack, ShowSnackBar, Navigate)

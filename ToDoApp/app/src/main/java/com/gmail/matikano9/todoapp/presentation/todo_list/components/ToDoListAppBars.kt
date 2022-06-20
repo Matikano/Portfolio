@@ -202,7 +202,8 @@ fun SortAction(
             contentDescription = stringResource(id = R.string.sort_tasks)
         )
         DropdownMenu(
-            modifier = Modifier.background(color = MaterialTheme.colors.background),
+            modifier = Modifier
+                .background(color = MaterialTheme.colors.background),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
@@ -262,29 +263,5 @@ fun DeleteAllAction(
             }
 
         }
-    }
-}
-
-@Preview
-@Composable
-fun DefaultListAppBarPreview() {
-    ToDoAppTheme {
-        DefaultListAppBar(
-            onSearchClicked = {},
-            onSortClicked = {},
-            onDeleteAllClicked = {}
-        )
-    }
-}
-
-@Preview
-@Composable
-fun SearchAppBarPreview() {
-    ToDoAppTheme {
-        SearchAppBar(
-            text = "Search",
-            onTextChange = {},
-            onCloseClicked = {},
-        )
     }
 }

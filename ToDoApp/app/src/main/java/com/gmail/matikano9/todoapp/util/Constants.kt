@@ -10,4 +10,8 @@ object Constants {
         const val DATABASE_VERSION = 1
     }
 
+    object Navigation {
+        const val NAV_ARG_TODO_TASK = "toDoTask"
+    }
+
 }

@@ -32,7 +32,7 @@ data class ToDoTask(
         const val TABLE_NAME = "todo_task_tab"
     }
 
-    fun dueLocalDateTime(): LocalDateTime =
+    fun dueLocalDateTime(): LocalDateTime? =
         LocalDateTime.ofInstant(
             Instant.ofEpochMilli(dueTimeInMillis),
             ZoneId.systemDefault()

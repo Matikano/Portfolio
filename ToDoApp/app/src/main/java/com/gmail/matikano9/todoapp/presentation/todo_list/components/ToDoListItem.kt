@@ -8,7 +8,6 @@ import androidx.compose.material.icons.filled.Timer
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -31,7 +30,7 @@ fun ToDoListItem(
     onItemClicked: (ToDoTask) -> Unit
 ) {
 
-    val dueDate = toDoTask.dueLocalDateTime()
+    val dueDateTime = toDoTask.dueLocalDateTime()
 
     Card(
         modifier = Modifier
@@ -88,16 +87,16 @@ fun ToDoListItem(
 
                 TypeLabel(type = toDoTask.type)
                 Spacer(Modifier.height(SPACE_SMALL))
-                DateLabel(dateTime = dueDate)
+                DateLabel(dateTime = dueDateTime)
                 Spacer(Modifier.height(SPACE_SMALL))
-                TimeLabel(dateTime = dueDate)
+                TimeLabel(dateTime = dueDateTime)
             }
         }
     }
 }
 @Composable
 fun DateLabel(
-    dateTime: LocalDateTime
+    dateTime: LocalDateTime?
 ){
     Row(
         modifier = Modifier,
@@ -105,7 +104,7 @@ fun DateLabel(
 
     ){
         Text(
-            text = dateTime.toDateString(),
+            text = dateTime?.toDateString() ?: "",
             fontSize = MaterialTheme.typography.body2.fontSize
         )
         Spacer(Modifier.width(SPACE_SMALL))
@@ -121,7 +120,7 @@ fun DateLabel(
 
 @Composable
 fun TimeLabel(
-    dateTime: LocalDateTime
+    dateTime: LocalDateTime?
 ){
     Row(
         modifier = Modifier,
@@ -129,7 +128,7 @@ fun TimeLabel(
 
     ){
         Text(
-            text = dateTime.toTimeString(),
+            text = dateTime?.toTimeString() ?: "",
             fontSize = MaterialTheme.typography.body2.fontSize
         )
         Spacer(Modifier.width(SPACE_SMALL))
