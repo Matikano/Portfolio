@@ -106,7 +106,10 @@ class ToDoTaskViewModel  @Inject constructor(
                     }
 
                     viewModelScope.launch {
-                        repository.updateTask(toDoTask = toDoTask!!)
+                        if(state.editing)
+                            repository.updateTask(toDoTask = toDoTask!!)
+                        else
+                            repository.addTask(toDoTask = toDoTask!!)
                     }
 
                     sendUiEvent(UiEvent.PopBackStack)
