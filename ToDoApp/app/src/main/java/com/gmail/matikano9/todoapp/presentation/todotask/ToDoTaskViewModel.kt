@@ -61,11 +61,19 @@ class ToDoTaskViewModel  @Inject constructor(
             }
 
             is ToDoTaskEvent.OnDescriptionChanged -> {
-                state = state.copy(description = event.description)
+                state = state.copy(
+                    description = event.description,
+                )
+
+                validateDescription()
             }
 
             is ToDoTaskEvent.OnTitleChanged -> {
-                state = state.copy(title = event.title)
+                state = state.copy(
+                    title = event.title,
+                )
+
+                validateTitle()
             }
 
             is ToDoTaskEvent.OnPriorityChanged -> {
@@ -81,6 +89,7 @@ class ToDoTaskViewModel  @Inject constructor(
                     dueDate = event.dueDate,
                     dueDateString = event.dueDateString
                 )
+                validateDate()
             }
 
             is ToDoTaskEvent.OnDueTimeChanged -> {
@@ -88,6 +97,7 @@ class ToDoTaskViewModel  @Inject constructor(
                     dueTime = event.dueTime,
                     dueTimeString = event.dueTimeString
                 )
+                validateTime()
             }
 
             is ToDoTaskEvent.OnCloseDialog -> {
