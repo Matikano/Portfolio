@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.2.2] - 2022-06-21
+
+### Added
+* Swipe to dismiss functionality in ToDoListItem (TodoListEvent and ToDoListViewModel adjusted accordinlgy) which deletes ToDoTask from the list when swiped from right to left
+* Validation package in domain packages whith Validation usecases and Top Validations class that encapsulates all validation use case classes
+* Validation module for Dependency Injects taht provides all Validation use case classes 
+
+### Changed
+* Validation as in clean architecture standards (use cases, ValidationResult class)
+* Adjusted DI for new validation features
+* Adjsuted TextInputFields to have isError parameter set (for more clear visual representation of validation errors)
+
 ## [0.2.1] - 2022-06-21
 
 ### Added

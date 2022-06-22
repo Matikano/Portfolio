@@ -105,6 +105,12 @@ class ToDoListViewModel @Inject constructor(
             is ToDoListEvent.OnFabAddClicked -> {
                 sendUiEvent(UiEvent.Navigate(ToDoTaskScreenDestination()))
             }
+
+            is ToDoListEvent.OnSwipeToDelete -> {
+                viewModelScope.launch {
+                    repository.deleteTask(event.toDoTask)
+                }
+            }
         }
 
     }

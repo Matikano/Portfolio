@@ -22,6 +22,7 @@ sealed class ToDoTaskEvent {
     data class OnPriorityChanged(val priority: Priority): ToDoTaskEvent()
     data class OnTypeChanged(val type: TaskType): ToDoTaskEvent()
 
+
     data class OnDueDateChanged(
         val dueDate: LocalDate,
         val dueDateString: String = dueDate.toDateString()

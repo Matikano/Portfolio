@@ -21,6 +21,7 @@ fun ToDoTaskTextField(
     modifier: Modifier = Modifier,
     value: String,
     label: String,
+    isError: Boolean,
     onTextChanged: (String) -> Unit,
     singleLine: Boolean = true,
     maxLines: Int = 1,
@@ -35,6 +36,7 @@ fun ToDoTaskTextField(
         label = {
             Text(text = label)
         },
+        isError = isError,
         colors = TextFieldDefaults.textFieldColors(
             cursorColor = MaterialTheme.colors.secondary,
             focusedIndicatorColor = MaterialTheme.colors.secondary,

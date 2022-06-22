@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.gmail.matikano9.todoapp.R
 import com.gmail.matikano9.todoapp.domain.model.ToDoTask
 import com.gmail.matikano9.todoapp.domain.repository.ToDoRepository
+import com.gmail.matikano9.todoapp.domain.validation.*
 import com.gmail.matikano9.todoapp.util.Constants.Navigation.NAV_ARG_TODO_TASK
 import com.gmail.matikano9.todoapp.util.Constants.Validation.DESCRIPTION_ERROR
 import com.gmail.matikano9.todoapp.util.Constants.Validation.DUE_DATE_EMPTY
@@ -30,7 +31,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ToDoTaskViewModel  @Inject constructor(
     private val repository: ToDoRepository,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
+    private val validations: Validations
 ): ViewModel(){
 
     var toDoTask: ToDoTask? = null
@@ -43,6 +45,11 @@ class ToDoTaskViewModel  @Inject constructor(
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent  = _uiEvent.receiveAsFlow()
+
+    val validateTitle = validations.validateTitle
+    val validateDescription = validations.validateDescription
+    val validateDate = validations.validateDate
+    val validateTime = validations.validateTime
 
     fun onEvent(event: ToDoTaskEvent){
         when(event){
@@ -61,19 +68,23 @@ class ToDoTaskViewModel  @Inject constructor(
             }
 
             is ToDoTaskEvent.OnDescriptionChanged -> {
+                val valResult = validations.validateDescription(event.description)
+
                 state = state.copy(
                     description = event.description,
+                    descriptionError = valResult.errorMessage
                 )
 
-                validateDescription()
             }
 
             is ToDoTaskEvent.OnTitleChanged -> {
+                val valResult = validateTitle(event.title)
+
                 state = state.copy(
                     title = event.title,
+                    titleError = valResult.errorMessage
                 )
 
-                validateTitle()
             }
 
             is ToDoTaskEvent.OnPriorityChanged -> {
@@ -85,19 +96,23 @@ class ToDoTaskViewModel  @Inject constructor(
             }
 
             is ToDoTaskEvent.OnDueDateChanged -> {
+                val valResult = validateDate(event.dueDateString, event.dueDate)
+
                 state = state.copy(
                     dueDate = event.dueDate,
-                    dueDateString = event.dueDateString
+                    dueDateString = event.dueDateString,
+                    dueDateError = valResult.errorMessage
                 )
-                validateDate()
             }
 
             is ToDoTaskEvent.OnDueTimeChanged -> {
+                val valResult = validateTime(event.dueTimeString)
+
                 state = state.copy(
                     dueTime = event.dueTime,
-                    dueTimeString = event.dueTimeString
+                    dueTimeString = event.dueTimeString,
+                    dueTimeError = valResult.errorMessage
                 )
-                validateTime()
             }
 
             is ToDoTaskEvent.OnCloseDialog -> {
@@ -137,67 +152,31 @@ class ToDoTaskViewModel  @Inject constructor(
     }
 
     private fun validateFields(): Boolean {
-        validateTitle()
-        validateDescription()
-        validateDate()
-        validateTime()
-        return state.titleError == null &&
-                state.descriptionError == null &&
-                state.dueDateError == null &&
-                state.dueTimeError == null
-    }
+        val titleResult = validateTitle(state.title)
+        val descriptionResult = validateDescription(state.description)
+        val dateResult = validateDate(state.dueDateString, state.dueDate!!)
+        val timeResult = validateTime(state.dueTimeString)
 
-    private fun validateTitle() {
-        state = if(state.title.isBlank() || state.title.isEmpty()){
-            state.copy(
-                titleError = TITLE_ERROR
-            )
-        } else {
-            state.copy(
-                titleError = null
+        val hasError = listOf(
+            titleResult,
+            descriptionResult,
+            dateResult,
+            timeResult
+        ).any { result -> !result.successful }
+
+        if(hasError){
+            state = state.copy(
+                titleError = titleResult.errorMessage,
+                descriptionError = descriptionResult.errorMessage,
+                dueDateError =  dateResult.errorMessage,
+                dueTimeError = timeResult.errorMessage
             )
         }
+
+        return !hasError
     }
 
-    private fun validateDescription() {
-        state = if(state.description.isBlank() || state.description.isEmpty()){
-            state.copy(
-                descriptionError = DESCRIPTION_ERROR
-            )
-        } else {
-            state.copy(
-                descriptionError = null
-            )
-        }
-    }
 
-    private fun validateDate() {
-        state = if(state.dueDateString.isBlank() || state.dueDateString.isEmpty()) {
-            state.copy(
-                dueDateError = DUE_DATE_EMPTY
-            )
-        } else if (state.dueDate!!.isBefore(LocalDate.now())) {
-            state.copy(
-                dueDateError = DUE_DATE_INVALID
-            )
-        } else {
-            state.copy(
-                dueDateError = null
-            )
-        }
-    }
-
-    private fun validateTime() {
-        state = if(state.dueTimeString.isBlank() || state.dueTimeString.isEmpty()){
-            state.copy(
-                dueTimeError = DUE_TIME_EMPTY
-            )
-        } else {
-            state.copy(
-                dueTimeError = null
-            )
-        }
-    }
 
     private fun sendUiEvent(event: UiEvent){
         viewModelScope.launch {

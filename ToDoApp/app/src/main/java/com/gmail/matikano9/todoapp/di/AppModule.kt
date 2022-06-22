@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.gmail.matikano9.todoapp.data.database.ToDoDao
 import com.gmail.matikano9.todoapp.data.database.ToDoDatabase
+import com.gmail.matikano9.todoapp.domain.validation.*
 import com.gmail.matikano9.todoapp.util.Constants.Database.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -30,4 +31,5 @@ object AppModule {
     fun provideToDoDao(
         database: ToDoDatabase
     ): ToDoDao = database.toDoDao
+
 }

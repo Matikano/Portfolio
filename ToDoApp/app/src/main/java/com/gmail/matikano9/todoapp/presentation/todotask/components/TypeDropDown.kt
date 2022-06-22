@@ -23,6 +23,7 @@ import com.gmail.matikano9.todoapp.presentation.ui.theme.PADDING_MEDIUM
 
 @Composable
 fun TypeDropDown(
+    modifier: Modifier = Modifier,
     type: TaskType,
     onEvent: (ToDoTaskEvent) -> Unit
 ) {
@@ -32,7 +33,7 @@ fun TypeDropDown(
     }
 
     OutlinedTextField(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clickable(enabled = false, onClick = {}),
         readOnly = true,

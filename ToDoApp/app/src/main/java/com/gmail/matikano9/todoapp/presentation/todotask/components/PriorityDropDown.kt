@@ -23,6 +23,7 @@ import com.gmail.matikano9.todoapp.presentation.ui.theme.PADDING_MEDIUM
 
 @Composable
 fun PriorityDropDown(
+    modifier : Modifier = Modifier,
     priority: Priority,
     onEvent: (ToDoTaskEvent) -> Unit
 ) {
@@ -33,7 +34,7 @@ fun PriorityDropDown(
 
 
     OutlinedTextField(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clickable(enabled = false, onClick = {}),
         readOnly = true,

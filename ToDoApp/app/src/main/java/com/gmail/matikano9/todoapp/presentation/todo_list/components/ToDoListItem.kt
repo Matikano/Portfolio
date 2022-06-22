@@ -1,13 +1,17 @@
 package com.gmail.matikano9.todoapp.presentation.todo_list.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -41,8 +45,9 @@ fun ToDoListItem(
                 start = PADDING_SMALL,
                 end = PADDING_SMALL
             ),
-
-        onClick = { onItemClicked(toDoTask) },
+        onClick = {
+            onItemClicked(toDoTask)
+        },
         elevation = 8.dp,
         shape = Shapes.medium,
         backgroundColor = toDoTask.priority.color,
@@ -94,6 +99,38 @@ fun ToDoListItem(
         }
     }
 }
+
+
+@Composable
+fun SwipeBackground(
+    degrees: Float
+) {
+    Box(
+        modifier = Modifier
+            .padding(
+                top = PADDING_SMALL,
+                start = PADDING_SMALL,
+                end = PADDING_SMALL,
+                bottom = PADDING_VERY_SMALL
+
+            )
+            .fillMaxSize()
+            .clip(Shapes.medium)
+            .background(MaterialTheme.colors.error)
+            .padding(horizontal = PADDING_LARGE),
+        contentAlignment = Alignment.CenterEnd,
+    ){
+        Icon(
+            modifier = Modifier
+                .size(SWIPE_TO_DISMISS_ICON_SIZE)
+                .rotate(degrees),
+            imageVector = Icons.Filled.Delete,
+            contentDescription = stringResource(id = R.string.delete_icon),
+            tint = MaterialTheme.colors.onBackground
+        )
+    }
+}
+
 @Composable
 fun DateLabel(
     dateTime: LocalDateTime?
