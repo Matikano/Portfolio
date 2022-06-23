@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MobileBankAppUI</string>
+    <string name="my_products">My products</string>
+    <string name="action_message">Message icon</string>
+    <string name="action_call">Action call</string>
+    <string name="arrow_right">Arrow right icon</string>
+    <string name="background_iamge">Background image</string>
+    <string name="home_label">Start</string>
+    <string name="payments_label">Payments</string>
+    <string name="accounts_label">Accounts</string>
+    <string name="settings_label">Settings</string>
+    <string name="fab_payments">Payments Fab</string>
+    <string name="empty" />
+    <string name="available_resourcers">Available funds</string>
+</resources>
