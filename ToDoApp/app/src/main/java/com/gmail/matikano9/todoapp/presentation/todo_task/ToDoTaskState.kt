@@ -1,4 +1,4 @@
-package com.gmail.matikano9.todoapp.presentation.todotask
+package com.gmail.matikano9.todoapp.presentation.todo_task
 
 import com.gmail.matikano9.todoapp.domain.model.Priority
 import com.gmail.matikano9.todoapp.domain.model.TaskType

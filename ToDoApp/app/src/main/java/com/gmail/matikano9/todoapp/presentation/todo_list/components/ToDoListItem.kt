@@ -49,7 +49,7 @@ fun ToDoListItem(
             onItemClicked(toDoTask)
         },
         elevation = 8.dp,
-        shape = Shapes.medium,
+        shape = Shapes.small,
         backgroundColor = toDoTask.priority.color,
         contentColor = MaterialTheme.colors.onSurface,
     ) {
@@ -115,7 +115,7 @@ fun SwipeBackground(
 
             )
             .fillMaxSize()
-            .clip(Shapes.medium)
+            .clip(Shapes.small)
             .background(MaterialTheme.colors.error)
             .padding(horizontal = PADDING_LARGE),
         contentAlignment = Alignment.CenterEnd,

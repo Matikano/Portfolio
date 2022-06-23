@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.gmail.matikano9.todoapp.R
 import com.gmail.matikano9.todoapp.domain.model.ToDoTask
+import com.gmail.matikano9.todoapp.presentation.destinations.SplashScreenDestination
+import com.gmail.matikano9.todoapp.presentation.destinations.ToDoListScreenDestination
 import com.gmail.matikano9.todoapp.presentation.todo_list.components.ListAppBar
 import com.gmail.matikano9.todoapp.presentation.todo_list.components.SwipeBackground
 import com.gmail.matikano9.todoapp.presentation.todo_list.components.ToDoListItem
@@ -35,7 +37,6 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @ExperimentalMaterialApi
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@RootNavGraph(start = true)
 @Destination
 @Composable
 fun ToDoListScreen(

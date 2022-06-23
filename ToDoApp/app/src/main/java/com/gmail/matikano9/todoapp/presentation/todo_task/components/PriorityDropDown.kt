@@ -1,11 +1,7 @@
-package com.gmail.matikano9.todoapp.presentation.todotask.components
+package com.gmail.matikano9.todoapp.presentation.todo_task.components
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -17,9 +13,8 @@ import androidx.compose.ui.res.stringResource
 import com.gmail.matikano9.todoapp.R
 import com.gmail.matikano9.todoapp.domain.model.Priority
 import com.gmail.matikano9.todoapp.presentation.components.PriorityItem
-import com.gmail.matikano9.todoapp.presentation.todotask.ToDoTaskEvent
+import com.gmail.matikano9.todoapp.presentation.todo_task.ToDoTaskEvent
 import com.gmail.matikano9.todoapp.presentation.ui.theme.CORNER_SHAPE_SMALL
-import com.gmail.matikano9.todoapp.presentation.ui.theme.PADDING_MEDIUM
 
 @Composable
 fun PriorityDropDown(

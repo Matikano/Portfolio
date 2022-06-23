@@ -18,6 +18,7 @@ val SPACE_MEDIUM = 16.dp
 val SPACE_LARGE = 32.dp
 
 val LABEL_ICON_SIZE = 24.dp
+val SPLASH_SCREEN_ICON_SIZE = 48.dp
 
 val TOP_APP_BAR_HEIGHT = 56.dp
 

@@ -1,4 +1,4 @@
-package com.gmail.matikano9.todoapp.presentation.todotask.components
+package com.gmail.matikano9.todoapp.presentation.todo_task.components
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.gmail.matikano9.todoapp.R
-import com.gmail.matikano9.todoapp.presentation.todotask.ToDoTaskEvent
-import com.gmail.matikano9.todoapp.presentation.todotask.ToDoTaskState
+import com.gmail.matikano9.todoapp.presentation.todo_task.ToDoTaskEvent
+import com.gmail.matikano9.todoapp.presentation.todo_task.ToDoTaskState
 import com.gmail.matikano9.todoapp.presentation.ui.theme.PADDING_MEDIUM
 import com.gmail.matikano9.todoapp.presentation.ui.theme.SPACE_MEDIUM
 import java.time.LocalDate

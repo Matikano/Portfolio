@@ -6,12 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [0.2.2] - 2022-06-21
+## [0.3.0] - 2022-06-23
 
 ### Added
-* Swipe to dismiss functionality in ToDoListItem (TodoListEvent and ToDoListViewModel adjusted accordinlgy) which deletes ToDoTask from the list when swiped from right to left
-* Validation package in domain packages whith Validation usecases and Top Validations class that encapsulates all validation use case classes
-* Validation module for Dependency Injects taht provides all Validation use case classes 
+* splashScreen which is app entry point, after some delay (3s) automatically navigates to main screen (ToDoListScreen)
+* use_case package with UseCase classes organized in separate packages for each screen
+* Dependency Injections for new use cases and modules that provide them in ViewModelScope (UseCaseModule with ToDoListModule and ToDoTaskModule)
+
+### Changed
+* Moved repository related functionalities to separate UseCase classes to properly follow Clean Architecture principles
+* Reorganized Validation classes to ../use_case/validation package to keep consistent project structure
+* Some constant values changes and teaks
+
+## [0.2.2] - 2022-06-22
+
+### Added
+* Swipe to dismiss functionality in ToDoListItem (TodoListEvent and ToDoListViewModel adjusted accordingly) which deletes ToDoTask from the list when swiped from right to left
+* Validation package in domain packages with Validation use cases and Top Validations class that encapsulates all validation use case classes
+* Validation module for Dependency Injects that provides all Validation use case classes 
 
 ### Changed
 * Validation as in clean architecture standards (use cases, ValidationResult class)

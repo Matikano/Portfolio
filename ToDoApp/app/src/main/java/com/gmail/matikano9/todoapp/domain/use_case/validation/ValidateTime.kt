@@ -1,10 +1,10 @@
-package com.gmail.matikano9.todoapp.domain.validation
+package com.gmail.matikano9.todoapp.domain.use_case.validation
 
-import com.gmail.matikano9.todoapp.util.Constants
 import com.gmail.matikano9.todoapp.util.Constants.Validation.DUE_TIME_EMPTY
+import com.gmail.matikano9.todoapp.util.ValidationResult
 
 class ValidateTime {
-    inline operator fun invoke(dueTimeString: String): ValidationResult {
+    operator fun invoke(dueTimeString: String): ValidationResult {
         return if(dueTimeString.isBlank() || dueTimeString.isEmpty())
             ValidationResult(
                 successful = false,

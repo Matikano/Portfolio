@@ -28,5 +28,6 @@
     <string name="dueDate">Due Date</string>
     <string name="titleError">Title cannot be empty</string>
     <string name="delete_icon">Delete icon</string>
+    <string name="task_icon">Task icon</string>
 
 </resources>

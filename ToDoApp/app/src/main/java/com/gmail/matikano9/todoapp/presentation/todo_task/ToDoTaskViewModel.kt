@@ -1,38 +1,30 @@
-package com.gmail.matikano9.todoapp.presentation.todotask
+package com.gmail.matikano9.todoapp.presentation.todo_task
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gmail.matikano9.todoapp.R
 import com.gmail.matikano9.todoapp.domain.model.ToDoTask
 import com.gmail.matikano9.todoapp.domain.repository.ToDoRepository
-import com.gmail.matikano9.todoapp.domain.validation.*
+import com.gmail.matikano9.todoapp.domain.use_case.todo_task.ToDoTaskUseCases
+import com.gmail.matikano9.todoapp.domain.use_case.validation.*
 import com.gmail.matikano9.todoapp.util.Constants.Navigation.NAV_ARG_TODO_TASK
-import com.gmail.matikano9.todoapp.util.Constants.Validation.DESCRIPTION_ERROR
-import com.gmail.matikano9.todoapp.util.Constants.Validation.DUE_DATE_EMPTY
-import com.gmail.matikano9.todoapp.util.Constants.Validation.DUE_DATE_INVALID
-import com.gmail.matikano9.todoapp.util.Constants.Validation.DUE_TIME_EMPTY
-import com.gmail.matikano9.todoapp.util.Constants.Validation.TITLE_ERROR
 import com.gmail.matikano9.todoapp.util.Extensions.toMillis
 import com.gmail.matikano9.todoapp.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
 class ToDoTaskViewModel  @Inject constructor(
-    private val repository: ToDoRepository,
-    savedStateHandle: SavedStateHandle,
-    private val validations: Validations
+    private val useCases: ToDoTaskUseCases,
+    private val validationUseCases: ValidationUseCases,
+    savedStateHandle: SavedStateHandle
 ): ViewModel(){
 
     var toDoTask: ToDoTask? = null
@@ -46,10 +38,10 @@ class ToDoTaskViewModel  @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent  = _uiEvent.receiveAsFlow()
 
-    val validateTitle = validations.validateTitle
-    val validateDescription = validations.validateDescription
-    val validateDate = validations.validateDate
-    val validateTime = validations.validateTime
+    val validateTitle = validationUseCases.validateTitle
+    val validateDescription = validationUseCases.validateDescription
+    val validateDate = validationUseCases.validateDate
+    val validateTime = validationUseCases.validateTime
 
     fun onEvent(event: ToDoTaskEvent){
         when(event){
@@ -61,14 +53,14 @@ class ToDoTaskViewModel  @Inject constructor(
 
             is ToDoTaskEvent.OnDeleteConfirmed -> {
                 viewModelScope.launch {
-                    repository.deleteTask(state.toDoTask!!)
+                    useCases.deleteTask(state.toDoTask!!)
                 }
 
                 sendUiEvent(UiEvent.PopBackStack)
             }
 
             is ToDoTaskEvent.OnDescriptionChanged -> {
-                val valResult = validations.validateDescription(event.description)
+                val valResult = validateDescription(event.description)
 
                 state = state.copy(
                     description = event.description,
@@ -84,7 +76,6 @@ class ToDoTaskViewModel  @Inject constructor(
                     title = event.title,
                     titleError = valResult.errorMessage
                 )
-
             }
 
             is ToDoTaskEvent.OnPriorityChanged -> {
@@ -140,9 +131,9 @@ class ToDoTaskViewModel  @Inject constructor(
 
                     viewModelScope.launch {
                         if(state.editing)
-                            repository.updateTask(toDoTask = toDoTask!!)
+                            useCases.updateTask(toDoTask = toDoTask!!)
                         else
-                            repository.addTask(toDoTask = toDoTask!!)
+                            useCases.addTask(toDoTask = toDoTask!!)
                     }
 
                     sendUiEvent(UiEvent.PopBackStack)

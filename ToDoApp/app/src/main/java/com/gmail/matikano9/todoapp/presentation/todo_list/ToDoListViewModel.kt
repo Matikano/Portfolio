@@ -5,8 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gmail.matikano9.todoapp.domain.model.Priority
-import com.gmail.matikano9.todoapp.domain.repository.ToDoRepository
+import com.gmail.matikano9.todoapp.domain.use_case.todo_list.ToDoListUseCases
 import com.gmail.matikano9.todoapp.presentation.destinations.ToDoTaskScreenDestination
 import com.gmail.matikano9.todoapp.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ToDoListViewModel @Inject constructor(
-    private val repository: ToDoRepository
+    private val useCases: ToDoListUseCases
 ): ViewModel(){
 
     var state by mutableStateOf(ToDoListState())
@@ -73,8 +72,7 @@ class ToDoListViewModel @Inject constructor(
 
             is ToDoListEvent.OnDeleteAllTaskConfirmed -> {
                 viewModelScope.launch {
-                    repository.deleteAllTasks()
-                    getAllTasks()
+                    useCases.deleteAllTasks()
                 }
             }
 
@@ -84,16 +82,10 @@ class ToDoListViewModel @Inject constructor(
                 )
 
                 viewModelScope.launch {
-                    when(state.sortPriority){
-                        Priority.High -> repository.sortByPriorityHigh.collect{
-                            tasks -> state = state.copy(toDoList = tasks)
-                        }
-                        Priority.Low -> repository.sortByPriorityLow.collect{
-                            tasks -> state = state.copy(toDoList = tasks)
-                        }
-                        else -> repository.getAllTasks.collect{
-                            tasks -> state = state.copy(toDoList = tasks)
-                        }
+                    useCases.getSortedTasks(state.sortPriority).collect{
+                        tasks -> state = state.copy(
+                            toDoList = tasks
+                        )
                     }
                 }
             }
@@ -108,7 +100,7 @@ class ToDoListViewModel @Inject constructor(
 
             is ToDoListEvent.OnSwipeToDelete -> {
                 viewModelScope.launch {
-                    repository.deleteTask(event.toDoTask)
+                    useCases.deleteTask(event.toDoTask)
                 }
             }
         }
@@ -123,7 +115,7 @@ class ToDoListViewModel @Inject constructor(
     
     private fun getAllTasks() {
         viewModelScope.launch {
-            repository.getAllTasks.collect { tasks->
+            useCases.getAllTasks().collect { tasks->
                 state = state.copy(toDoList = tasks)
             }
         }
@@ -133,7 +125,7 @@ class ToDoListViewModel @Inject constructor(
         query: String = state.searchQuery.lowercase(),
     ){
         viewModelScope.launch {
-            repository.searchTasks(query).collect { tasks->
+            useCases.getSearchedTasks(query).collect { tasks->
                 state = state.copy(toDoList = tasks)
             }
         }

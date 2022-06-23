@@ -1,21 +1,15 @@
-package com.gmail.matikano9.todoapp.presentation.todotask.components
+package com.gmail.matikano9.todoapp.presentation.todo_task.components
 
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.Cancel
-import androidx.compose.material.icons.outlined.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.ViewModel
 import com.gmail.matikano9.todoapp.R
 import com.gmail.matikano9.todoapp.domain.model.ToDoTask
 import com.gmail.matikano9.todoapp.presentation.components.DisplayAlertDialog
-import com.gmail.matikano9.todoapp.presentation.todotask.ToDoTaskEvent
-import com.gmail.matikano9.todoapp.presentation.todotask.ToDoTaskState
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
-
+import com.gmail.matikano9.todoapp.presentation.todo_task.ToDoTaskEvent
+import com.gmail.matikano9.todoapp.presentation.todo_task.ToDoTaskState
 
 
 @Composable

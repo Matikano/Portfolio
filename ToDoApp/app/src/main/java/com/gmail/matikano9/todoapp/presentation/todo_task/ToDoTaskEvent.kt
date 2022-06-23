@@ -1,13 +1,10 @@
-package com.gmail.matikano9.todoapp.presentation.todotask
+package com.gmail.matikano9.todoapp.presentation.todo_task
 
 import com.gmail.matikano9.todoapp.domain.model.Priority
 import com.gmail.matikano9.todoapp.domain.model.TaskType
-import com.gmail.matikano9.todoapp.domain.model.ToDoTask
-import com.gmail.matikano9.todoapp.presentation.todo_list.ToDoListEvent
 import com.gmail.matikano9.todoapp.util.Extensions.toDateString
 import com.gmail.matikano9.todoapp.util.Extensions.toTimeString
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
 
 sealed class ToDoTaskEvent {

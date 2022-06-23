@@ -1,4 +1,4 @@
-package com.gmail.matikano9.todoapp.domain.validation
+package com.gmail.matikano9.todoapp.util
 
 data class ValidationResult(
     val successful: Boolean,

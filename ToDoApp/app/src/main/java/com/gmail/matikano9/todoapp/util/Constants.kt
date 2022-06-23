@@ -22,5 +22,9 @@ object Constants {
         const val DUE_TIME_EMPTY = "Due time cannot be empty"
     }
 
+    object Splash {
+        const val SPLASH_DURATION = 2500L //in millis
+    }
+
 
 }

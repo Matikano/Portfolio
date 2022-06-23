@@ -1,8 +1,8 @@
-package com.gmail.matikano9.todoapp.domain.validation
+package com.gmail.matikano9.todoapp.domain.use_case.validation
 
 import javax.inject.Inject
 
-data class Validations @Inject constructor(
+data class ValidationUseCases @Inject constructor(
     val validateTitle: ValidateTitle,
     val validateDescription: ValidateDescription,
     val validateDate: ValidateDate,
