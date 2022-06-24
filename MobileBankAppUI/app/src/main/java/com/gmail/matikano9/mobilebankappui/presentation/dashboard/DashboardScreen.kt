@@ -4,8 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.gmail.matikano9.mobilebankappui.presentation.dashboard.components.DashboardAccountCard
@@ -15,7 +17,6 @@ import com.gmail.matikano9.mobilebankappui.domain.model.Account
 import com.gmail.matikano9.mobilebankappui.domain.model.AccountType
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
-import kotlin.random.Random
 
 @RootNavGraph(start = true)
 @Destination
@@ -28,22 +29,43 @@ fun DashboardScreen(
             .background(color = Surface)
             .fillMaxSize(),
     ) {
+        val accounts = listOf(
+           Account(
+                title = "${AccountType.Personal.name} account",
+                type = AccountType.Personal,
+            ),
+            Account(
+                title = "${AccountType.Savings.name} account",
+                type = AccountType.Savings,
+            ),
+            Account(
+                title = AccountType.CreditCard.name,
+                type = AccountType.CreditCard,
+            ),
+        )
+
         DashboardAdd(
             title = "Special offer!",
             description = "Recommend account to a friend and earn $200"
         )
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(
+            modifier = Modifier.height(32.dp)
+        )
         LazyRow(
-            modifier = Modifier.padding(start = 20.dp),
+            modifier = Modifier,
             content = {
-                items(AccountType.values()) { type ->
+
+                items(accounts.size) { i ->
+                    val account = accounts[i]
+                    if(i == 0){
+                        Spacer(
+                            modifier = Modifier
+                                .width(20.dp)
+                                .background(color = Color.Transparent)
+                        )
+                    }
                     DashboardAccountCard(
-                        account = Account(
-                            type.name,
-                            Random.nextDouble(1000.0, 5000.0),
-                            type,
-                            "00 1231 1321 5325 0040 2362"
-                        ),
+                        account = account,
                         onHistoryClicked = {},
                         onTransferClicked = {},
                         onMoreClicked = {}

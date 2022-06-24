@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.widget.DatePicker
 import android.widget.TimePicker
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -21,6 +20,7 @@ import com.gmail.matikano9.todoapp.presentation.todo_task.ToDoTaskEvent
 import com.gmail.matikano9.todoapp.presentation.todo_task.ToDoTaskState
 import com.gmail.matikano9.todoapp.presentation.ui.theme.PADDING_MEDIUM
 import com.gmail.matikano9.todoapp.presentation.ui.theme.SPACE_MEDIUM
+import com.gmail.matikano9.todoapp.util.Extensions.noRippleClickable
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
@@ -122,7 +122,10 @@ fun ToDoTaskContent(
             ToDoTaskTextField(
                 modifier = Modifier
                     .weight(1f)
-                    .clickable(enabled = false) {},
+                    .noRippleClickable {
+                        datePickerDialog.show()
+                    },
+                enabled = false,
                 value = state.dueDateString,
                 label = stringResource(id = R.string.dueDate),
                 isError = state.dueDateError != null,
@@ -152,7 +155,10 @@ fun ToDoTaskContent(
             ToDoTaskTextField(
                 modifier = Modifier
                     .weight(1f)
-                    .clickable(enabled = false) {},
+                    .noRippleClickable {
+                        timePickerDialog.show()
+                    },
+                enabled = false,
                 value = state.dueTimeString,
                 label = stringResource(id = R.string.dueTime),
                 isError = state.dueTimeError != null,

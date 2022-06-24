@@ -14,6 +14,7 @@ import com.gmail.matikano9.todoapp.R
 import com.gmail.matikano9.todoapp.domain.model.TaskType
 import com.gmail.matikano9.todoapp.presentation.todo_task.ToDoTaskEvent
 import com.gmail.matikano9.todoapp.presentation.ui.theme.CORNER_SHAPE_SMALL
+import com.gmail.matikano9.todoapp.util.Extensions.noRippleClickable
 
 @Composable
 fun TypeDropDown(
@@ -29,8 +30,10 @@ fun TypeDropDown(
     OutlinedTextField(
         modifier = modifier
             .fillMaxWidth()
-            .clickable(enabled = false, onClick = {}),
-        readOnly = true,
+            .noRippleClickable {
+                expanded = true
+            },
+        enabled = false,
         value = type.name,
         onValueChange = { typeName ->
             onEvent(ToDoTaskEvent.OnTypeChanged(TaskType.valueOf(typeName)))
@@ -41,9 +44,15 @@ fun TypeDropDown(
         shape = RoundedCornerShape(CORNER_SHAPE_SMALL),
         colors = TextFieldDefaults.textFieldColors(
             cursorColor = MaterialTheme.colors.secondary,
-            placeholderColor = MaterialTheme.colors.secondary,
-            focusedIndicatorColor = MaterialTheme.colors.onSurface.copy(alpha = IconOpacity),
-            focusedLabelColor = MaterialTheme.colors.onSurface.copy(alpha = IconOpacity),
+
+            focusedIndicatorColor = MaterialTheme.colors.secondary,
+            focusedLabelColor = MaterialTheme.colors.secondary,
+
+            disabledLabelColor = MaterialTheme.colors.onSurface.copy(ContentAlpha.medium),
+            disabledPlaceholderColor = MaterialTheme.colors.onSurface.copy(ContentAlpha.medium),
+            disabledTextColor = MaterialTheme.colors.onSurface.copy(ContentAlpha.medium),
+            disabledLeadingIconColor = MaterialTheme.colors.onSurface.copy(alpha = IconOpacity),
+            disabledTrailingIconColor = MaterialTheme.colors.onSurface.copy(alpha = IconOpacity),
         ),
         leadingIcon = {
             Icon(

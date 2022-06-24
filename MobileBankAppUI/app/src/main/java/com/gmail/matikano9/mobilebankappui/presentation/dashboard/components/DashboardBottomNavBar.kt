@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.gmail.matikano9.mobilebankappui.presentation.NavGraphs
@@ -22,6 +23,7 @@ import com.gmail.matikano9.mobilebankappui.presentation.appCurrentDestinationAsS
 import com.gmail.matikano9.mobilebankappui.presentation.dashboard.BottomBarDestination
 import com.gmail.matikano9.mobilebankappui.presentation.destinations.Destination
 import com.gmail.matikano9.mobilebankappui.presentation.startAppDestination
+import com.gmail.matikano9.mobilebankappui.ui.theme.AlegreyaSans
 import com.gmail.matikano9.mobilebankappui.ui.theme.BasicGradient
 import com.gmail.matikano9.mobilebankappui.ui.theme.RedGrad
 import com.gmail.matikano9.mobilebankappui.ui.theme.Shapes
@@ -86,7 +88,9 @@ fun DashboardBottomNavBar(
                                             )
                                         }
                                     },
-                                text = stringResource(id = destination.label)
+                                text = stringResource(id = destination.label),
+                                fontFamily = AlegreyaSans,
+                                fontWeight = FontWeight.Medium
                             )
                         }
                     )

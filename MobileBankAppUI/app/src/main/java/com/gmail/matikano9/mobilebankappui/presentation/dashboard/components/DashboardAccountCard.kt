@@ -39,7 +39,7 @@ fun DashboardAccountCard(
     Card(
         modifier = Modifier
             .clip(Shapes.large)
-            .width(295.dp)
+            .width(300.dp)
             .requiredHeight(230.dp)
             .padding(0.dp)
             .background(BasicGradient),
@@ -221,6 +221,6 @@ fun DashboardAccountCard(
         }
 
     }
-    Spacer(modifier = Modifier.width(16.dp))
+    Spacer(modifier = Modifier.width(20.dp))
 }
 

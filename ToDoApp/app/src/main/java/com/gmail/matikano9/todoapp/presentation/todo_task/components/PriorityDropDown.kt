@@ -15,6 +15,7 @@ import com.gmail.matikano9.todoapp.domain.model.Priority
 import com.gmail.matikano9.todoapp.presentation.components.PriorityItem
 import com.gmail.matikano9.todoapp.presentation.todo_task.ToDoTaskEvent
 import com.gmail.matikano9.todoapp.presentation.ui.theme.CORNER_SHAPE_SMALL
+import com.gmail.matikano9.todoapp.util.Extensions.noRippleClickable
 
 @Composable
 fun PriorityDropDown(
@@ -27,12 +28,13 @@ fun PriorityDropDown(
         mutableStateOf(false)
     }
 
-
     OutlinedTextField(
         modifier = modifier
             .fillMaxWidth()
-            .clickable(enabled = false, onClick = {}),
-        readOnly = true,
+            .noRippleClickable {
+                expanded = true
+            },
+        enabled = false,
         value = priority.name,
         onValueChange = { priorityName ->
             onEvent(ToDoTaskEvent.OnPriorityChanged(Priority.valueOf(priorityName)))
@@ -43,8 +45,15 @@ fun PriorityDropDown(
         shape = RoundedCornerShape(CORNER_SHAPE_SMALL),
         colors = TextFieldDefaults.textFieldColors(
             cursorColor = MaterialTheme.colors.secondary,
-            focusedIndicatorColor = MaterialTheme.colors.onSurface.copy(alpha = TextFieldDefaults.IconOpacity),
-            focusedLabelColor = MaterialTheme.colors.onSurface.copy(alpha = TextFieldDefaults.IconOpacity),
+
+            focusedIndicatorColor = MaterialTheme.colors.secondary,
+            focusedLabelColor = MaterialTheme.colors.secondary,
+
+            disabledLabelColor = MaterialTheme.colors.onSurface.copy(ContentAlpha.medium),
+            disabledPlaceholderColor = MaterialTheme.colors.onSurface.copy(ContentAlpha.medium),
+            disabledTextColor = MaterialTheme.colors.onSurface.copy(ContentAlpha.medium),
+            disabledLeadingIconColor = MaterialTheme.colors.onSurface.copy(alpha = TextFieldDefaults.IconOpacity),
+            disabledTrailingIconColor = MaterialTheme.colors.onSurface.copy(alpha = TextFieldDefaults.IconOpacity),
         ),
         leadingIcon = {
             Icon(

@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.3.1] - 2022-06-24
+
+### Added
+* extension function for Modifier that enables triggering onClick lambda without ripple effect
+
+### Changed
+* PriorityDropDown and TypeDropDown have now enabled = false to allow triggering custom onClick lambda with usage of added extension function noRippleClickable
+* PriorityDropDown and TypeDropDown have adjusted color scheme (to appear same in disabled mode)
+
 ## [0.3.0] - 2022-06-23
 
 ### Added
