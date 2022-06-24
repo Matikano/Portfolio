@@ -16,13 +16,13 @@ import com.gmail.matikano9.mobilebankappui.presentation.destinations.SettingsScr
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 
 enum class BottomBarDestination(
-    val direction: DirectionDestinationSpec,
-    val icon: ImageVector,
+    val direction: DirectionDestinationSpec?,
+    val icon: ImageVector?,
     @StringRes val label: Int
 ) {
     Dashboard(DashboardScreenDestination, Icons.Outlined.Home, R.string.home_label),
     Payments(PaymentsScreenDestination, Icons.Outlined.AccountBalanceWallet, R.string.payments_label),
-    Dummy(AccountsScreenDestination, Icons.Default.Add, R.string.empty),
+    Dummy(null, null, R.string.empty),
     Accounts(AccountsScreenDestination, Icons.Outlined.List, R.string.accounts_label),
     Settings(SettingsScreenDestination, Icons.Outlined.Settings, R.string.settings_label)
 }

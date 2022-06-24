@@ -52,7 +52,7 @@ fun DashboardBottomNavBar(
                         selected = currentDestination == destination.direction,
                         alwaysShowLabel = false,
                         onClick = {
-                            navController.navigate(destination.direction) {
+                            navController.navigate(destination.direction!!) {
                                 launchSingleTop = true
                             }
                         },
@@ -69,7 +69,7 @@ fun DashboardBottomNavBar(
                                             )
                                         }
                                     },
-                                imageVector = destination.icon,
+                                imageVector = destination.icon!!,
                                 contentDescription = stringResource(id = destination.label),
                             )
                         },

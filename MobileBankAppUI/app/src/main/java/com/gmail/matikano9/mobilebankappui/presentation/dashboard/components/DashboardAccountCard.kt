@@ -25,40 +25,40 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gmail.matikano9.mobilebankappui.R
+import com.gmail.matikano9.mobilebankappui.domain.model.Account
 import com.gmail.matikano9.mobilebankappui.ui.theme.*
+import com.gmail.matikano9.mobilebankappui.utils.Extensions.format
 
 @Composable
 fun DashboardAccountCard(
-    icon: ImageVector,
-    title: String,
-    amount: Float,
-    @DrawableRes imageRes: Int,
-    accountNumber: String,
+    account: Account,
     onHistoryClicked: () -> Unit,
-    onArrowClicked: () -> Unit,
+    onTransferClicked: () -> Unit,
     onMoreClicked: () -> Unit,
 ) {
     Card(
         modifier = Modifier
             .clip(Shapes.large)
             .width(295.dp)
-            .height(216.dp)
+            .requiredHeight(230.dp)
             .padding(0.dp)
             .background(BasicGradient),
         backgroundColor = Color.Transparent,
         elevation = 0.dp
     ) {
         Image(
-            modifier = Modifier.fillMaxSize(),
-            painter = painterResource(id = imageRes),
+            modifier = Modifier
+                .padding(0.dp)
+                .fillMaxSize(),
+            painter = painterResource(id = account.type.imageRes),
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            alpha = 0.15f
+            alpha = 0.2f
         )
         Column(
             modifier = Modifier
                 .padding(
-                    top = 8.dp,
+                    top = 4.dp,
                     start = 0.dp,
                     end = 0.dp,
                     bottom = 0.dp
@@ -67,7 +67,7 @@ fun DashboardAccountCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 10.dp),
+                    .padding(horizontal = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -75,14 +75,14 @@ fun DashboardAccountCard(
                     modifier = Modifier
                         .weight(1f)
                         .size(24.dp),
-                    imageVector = icon,
+                    imageVector = account.type.icon,
                     contentDescription = null,
                     tint = Color.White
                 )
-                Spacer(Modifier.width(4.dp))
+                Spacer(Modifier.width(9.dp))
                 Text(
                     modifier = Modifier.weight(8f),
-                    text = title,
+                    text = account.title,
                     fontSize = 20.sp,
                     fontFamily = AlegreyaSans,
                     fontWeight = FontWeight.Medium,
@@ -109,7 +109,7 @@ fun DashboardAccountCard(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 10.dp),
+                    .padding(horizontal = 12.dp),
                 text = stringResource(id = R.string.available_resourcers),
                 fontFamily = AlegreyaSans,
                 fontWeight = FontWeight.Normal,
@@ -119,21 +119,21 @@ fun DashboardAccountCard(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 10.dp),
-                text = "\$$amount",
+                    .padding(horizontal = 12.dp),
+                text = "\$${account.amount.format(2)}",
                 fontFamily = AlegreyaSans,
-                fontWeight = FontWeight.SemiBold,
+                fontWeight = FontWeight.Medium,
                 fontSize = 34.sp,
                 color = Color.White
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 10.dp)
+                    .padding(horizontal = 12.dp)
             ) {
                 Text(
-                    text = accountNumber,
+                    text = account.number,
                     fontFamily = AlegreyaSans,
                     fontWeight = FontWeight.Normal,
                     fontSize = 14.sp,
@@ -149,13 +149,15 @@ fun DashboardAccountCard(
                     tint = Color.White
                 )
             }
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
                 Button(
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(48.dp),
                     onClick = { onHistoryClicked() },
                     shape = RoundedCornerShape(
                         topStart = 16.dp,
@@ -164,7 +166,7 @@ fun DashboardAccountCard(
                         bottomEnd = 0.dp,
                     ),
                     border = BorderStroke(
-                        width = 2.dp,
+                        width = 3.dp,
                         color = Color.DarkGray
                     ),
                     colors = ButtonDefaults.buttonColors(
@@ -181,8 +183,10 @@ fun DashboardAccountCard(
                     )
                 }
                 Button(
-                    modifier = Modifier.weight(1f),
-                    onClick = { onMoreClicked() },
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(48.dp),
+                    onClick = { onTransferClicked() },
                     shape = RoundedCornerShape(
                         topStart = 0.dp,
                         bottomStart = 0.dp,
@@ -190,7 +194,7 @@ fun DashboardAccountCard(
                         bottomEnd = 16.dp,
                     ),
                     border = BorderStroke(
-                        width = 2.dp,
+                        width = 3.dp,
                         color = Color.DarkGray
                     ),
                     colors = ButtonDefaults.buttonColors(
@@ -219,3 +223,4 @@ fun DashboardAccountCard(
     }
     Spacer(modifier = Modifier.width(16.dp))
 }
+
