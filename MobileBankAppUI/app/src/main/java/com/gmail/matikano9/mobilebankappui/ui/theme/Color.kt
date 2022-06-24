@@ -13,6 +13,7 @@ val BlueGrad = Color(0xFF364CBC)
 val RedGrad = Color(0xFFD01010)
 
 val Surface = Color(0xFFF5F5F5)
+val PositiveTransfer = Color(0xFF0D9D00)
 
 val BasicGradient = Brush.linearGradient(
     colors = listOf(

@@ -12,4 +12,6 @@
     <string name="fab_payments">Payments Fab</string>
     <string name="empty" />
     <string name="available_resourcers">Available funds</string>
+    <string name="recent_events_title">Recent events</string>
+    <string name="transaction_icon">Transaction Icon</string>
 </resources>

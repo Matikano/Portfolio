@@ -5,12 +5,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Chat
-import androidx.compose.material.icons.outlined.PhoneInTalk
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -26,7 +24,7 @@ fun DashboardTopAppBar(
     TopAppBar(
         modifier = modifier
             .fillMaxWidth()
-            .height(TOP_APP_BAR_HEIGHT)
+            .height(APP_BAR_HEIGHT)
             .background(
                 brush = BasicGradient,
                 alpha = 0.95f
@@ -62,7 +60,7 @@ fun MessagesAction() {
     ) {
        Icon(
            modifier = Modifier.size(ACTION_ICON_SIZE),
-           imageVector = Icons.Outlined.Chat,
+           painter = painterResource(id = R.drawable.ic_message_detail),
            contentDescription = stringResource(id = R.string.action_message),
            tint = Color.White,
        )
@@ -78,7 +76,7 @@ fun CallAction() {
     ) {
        Icon(
            modifier = Modifier.size(ACTION_ICON_SIZE),
-           imageVector = Icons.Outlined.PhoneInTalk,
+           painter = painterResource(id = R.drawable.ic_phone_call),
            contentDescription = stringResource(id = R.string.action_call),
            tint = Color.White,
        )

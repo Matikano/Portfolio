@@ -31,10 +31,11 @@ data class Account(
 
 enum class AccountType(
     @DrawableRes val imageRes: Int,
-    val icon: ImageVector
+    @DrawableRes val iconRes: Int,
+    val actionTitle: String,
 ){
-    Personal(R.mipmap.account_card_bg_foreground, Icons.Outlined.MonetizationOn),
-    Savings(R.mipmap.savings_bg_foreground, Icons.Outlined.Savings),
-    CreditCard(R.mipmap.credit_card_bg_foreground, Icons.Outlined.CreditCard)
+    Personal(R.mipmap.account_card_bg_foreground, R.drawable.ic_money, "Transfer"),
+    Savings(R.mipmap.savings_bg_foreground, R.drawable.ic_savings, "Deposit"),
+    CreditCard(R.mipmap.credit_card_bg_foreground, R.drawable.ic_credit_card, "Pay off")
 
 }

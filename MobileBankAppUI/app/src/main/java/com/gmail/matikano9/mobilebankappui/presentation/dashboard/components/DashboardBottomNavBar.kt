@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,6 +28,7 @@ import com.gmail.matikano9.mobilebankappui.ui.theme.AlegreyaSans
 import com.gmail.matikano9.mobilebankappui.ui.theme.BasicGradient
 import com.gmail.matikano9.mobilebankappui.ui.theme.RedGrad
 import com.gmail.matikano9.mobilebankappui.ui.theme.Shapes
+import com.gmail.matikano9.mobilebankappui.utils.Extensions.setGradient
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.navigation.navigateTo
 
@@ -61,33 +63,21 @@ fun DashboardBottomNavBar(
                         icon = {
                             Icon(
                                 modifier = Modifier
-                                    .graphicsLayer(alpha = 0.99f)
-                                    .drawWithCache {
-                                        onDrawWithContent {
-                                            drawContent()
-                                            if (currentDestination == destination.direction) drawRect(
-                                                BasicGradient,
-                                                blendMode = BlendMode.SrcAtop
-                                            )
-                                        }
-                                    },
-                                imageVector = destination.icon!!,
+                                    .setGradient(
+                                        BasicGradient,
+                                        currentDestination == destination.direction
+                                    ),
+                                painter = painterResource(id = destination.icon!!),
                                 contentDescription = stringResource(id = destination.label),
                             )
                         },
                         label = {
                             Text(
                                 modifier = Modifier
-                                    .graphicsLayer(alpha = 0.99f)
-                                    .drawWithCache {
-                                        onDrawWithContent {
-                                            drawContent()
-                                            if (currentDestination == destination.direction) drawRect(
-                                                BasicGradient,
-                                                blendMode = BlendMode.SrcAtop
-                                            )
-                                        }
-                                    },
+                                    .setGradient(
+                                        BasicGradient,
+                                        currentDestination == destination.direction
+                                    ),
                                 text = stringResource(id = destination.label),
                                 fontFamily = AlegreyaSans,
                                 fontWeight = FontWeight.Medium

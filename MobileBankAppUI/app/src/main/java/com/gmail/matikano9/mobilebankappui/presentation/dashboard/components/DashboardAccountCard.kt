@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -42,7 +43,10 @@ fun DashboardAccountCard(
             .width(300.dp)
             .requiredHeight(230.dp)
             .padding(0.dp)
-            .background(BasicGradient),
+            .background(
+                BasicGradient,
+                alpha = 0.9f
+            ),
         backgroundColor = Color.Transparent,
         elevation = 0.dp
     ) {
@@ -75,7 +79,7 @@ fun DashboardAccountCard(
                     modifier = Modifier
                         .weight(1f)
                         .size(24.dp),
-                    imageVector = account.type.icon,
+                    painter = painterResource(id = account.type.iconRes),
                     contentDescription = null,
                     tint = Color.White
                 )
@@ -143,7 +147,7 @@ fun DashboardAccountCard(
                 Icon(
                     modifier = Modifier
                         .size(20.dp)
-                        .clickable {  },
+                        .clickable { },
                     imageVector = Icons.Default.ContentCopy,
                     contentDescription = null,
                     tint = Color.White
@@ -202,7 +206,7 @@ fun DashboardAccountCard(
                     )
                 ) {
                     Text(
-                        text = "Transfer",
+                        text = account.type.actionTitle,
                         fontFamily = AlegreyaSans,
                         fontWeight = FontWeight.Normal,
                         fontSize = 18.sp,
@@ -212,7 +216,7 @@ fun DashboardAccountCard(
                     Icon(
                         imageVector = Icons.Default.ChevronRight,
                         contentDescription = null,
-                        tint = Color.White
+                        tint = Color.White,
                     )
 
                 }

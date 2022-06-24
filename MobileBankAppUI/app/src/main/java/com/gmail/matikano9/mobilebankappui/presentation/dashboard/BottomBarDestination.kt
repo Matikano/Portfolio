@@ -1,5 +1,6 @@
 package com.gmail.matikano9.mobilebankappui.presentation.dashboard
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -17,12 +18,12 @@ import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 
 enum class BottomBarDestination(
     val direction: DirectionDestinationSpec?,
-    val icon: ImageVector?,
+    @DrawableRes val icon: Int?,
     @StringRes val label: Int
 ) {
-    Dashboard(DashboardScreenDestination, Icons.Outlined.Home, R.string.home_label),
-    Payments(PaymentsScreenDestination, Icons.Outlined.AccountBalanceWallet, R.string.payments_label),
+    Dashboard(DashboardScreenDestination, R.drawable.ic_home, R.string.home_label),
+    Payments(PaymentsScreenDestination, R.drawable.ic_wallet, R.string.payments_label),
     Dummy(null, null, R.string.empty),
-    Accounts(AccountsScreenDestination, Icons.Outlined.List, R.string.accounts_label),
-    Settings(SettingsScreenDestination, Icons.Outlined.Settings, R.string.settings_label)
+    Accounts(AccountsScreenDestination, R.drawable.ic_list, R.string.accounts_label),
+    Settings(SettingsScreenDestination, R.drawable.ic_settings, R.string.settings_label)
 }

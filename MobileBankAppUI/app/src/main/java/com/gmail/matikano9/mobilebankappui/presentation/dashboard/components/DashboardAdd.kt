@@ -27,71 +27,74 @@ import com.gmail.matikano9.mobilebankappui.R
 fun DashboardAdd(
     modifier: Modifier = Modifier,
     title: String,
-    description: String
+    description: String,
+    show: Boolean = true,
+    onClick: () -> Unit
 ) {
-    Box(
-        modifier = Modifier
-            .height(80.dp)
-            .fillMaxWidth()
-            .background(color = Color.Black)
-    ) {
-        Image(
+    if(show) {
+        Box(
             modifier = Modifier
-                .fillMaxWidth(),
-            painter = painterResource(id = R.mipmap.add_bg_foreground),
-            contentDescription = stringResource(id = R.string.background_iamge),
-            contentScale = ContentScale.Crop,
-            alpha = 0.5f
-        )
-
-        Row(
-            modifier = modifier
+                .height(80.dp)
                 .fillMaxWidth()
-                .padding(
-                    top = 20.dp,
-                    start = 20.dp,
-                    end = 20.dp,
-                    bottom = 18.dp
-                ),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .background(color = Color.Black)
         ) {
-            Column(
-                modifier = Modifier,
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.Start
+            Image(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                painter = painterResource(id = R.mipmap.add_bg_foreground),
+                contentDescription = stringResource(id = R.string.background_iamge),
+                contentScale = ContentScale.Crop,
+                alpha = 0.5f
+            )
+
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = 20.dp,
+                        start = 20.dp,
+                        end = 20.dp,
+                        bottom = 18.dp
+                    ),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = title,
-                    fontSize = 18.sp,
-                    fontFamily = AlegreyaSans,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.White
-                )
-                Spacer(modifier = Modifier.height(3.dp))
-                Text(
-                    text = description,
-                    fontSize = 14.sp,
-                    fontFamily = AlegreyaSans,
-                    fontWeight = FontWeight.Medium,
-                    color = Color.White
+                Column(
+                    modifier = Modifier,
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    Text(
+                        text = title,
+                        fontSize = 18.sp,
+                        fontFamily = AlegreyaSans,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.White
+                    )
+                    Spacer(modifier = Modifier.height(3.dp))
+                    Text(
+                        text = description,
+                        fontSize = 14.sp,
+                        fontFamily = AlegreyaSans,
+                        fontWeight = FontWeight.Medium,
+                        color = Color.White
 
-                )
-
-            }
-            IconButton(
-                onClick = {
+                    )
 
                 }
-            ) {
-                Icon(
-                    modifier = Modifier.size(32.dp),
-                    imageVector = Icons.Default.ArrowForward,
-                    contentDescription = stringResource(id = R.string.arrow_right),
-                    tint = Color.White
-                )
+                IconButton(
+                    onClick = {
+                        onClick()
+                    }
+                ) {
+                    Icon(
+                        modifier = Modifier.size(32.dp),
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = stringResource(id = R.string.arrow_right),
+                        tint = Color.White
+                    )
+                }
             }
         }
     }
-
 }
