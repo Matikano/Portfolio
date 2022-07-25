@@ -4,6 +4,7 @@
  - Clean Architecture
  - ROOM Database
  - Retrofit
+ - Dependency Injection (Dagger Hilt)
  - JetPack Compose
  - JetPack Navigation
 
