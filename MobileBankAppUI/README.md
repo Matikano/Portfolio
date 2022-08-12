@@ -8,8 +8,8 @@ The UI was created using mockups done by Mateusz Winsław - https://www.linkedin
 * Compose Navigation - Destinations
 * JetPack Compose UI
 
-## Screenshots for the App
+## Screenshots from the App
 * Main screen
-![Alt text](/screenshots/ss1.png?raw=true)
-* Main screen continutation
-![Alte text](/screenshots/ss2.png?raw=true)
+  ![Main screen](/screenshots/ss1.png?raw=true "Main screen")
+* Main screen continuation
+  ![Main screen continuation](/screenshots/ss2.png?raw=true "Main screen continuation")
