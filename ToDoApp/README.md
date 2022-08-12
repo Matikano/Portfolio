@@ -1,7 +1,8 @@
-#README
-##ToDoApp is a simple application that allows user to create, store, edit and delete tasks.
+# README
 
-###It uses the following Android Programming concepts and technologies:
+## ToDoApp is a simple application that allows user to create, store, edit and delete tasks.
+
+### It uses the following Android Programming concepts and technologies:
 * MVVM design pattern
 * Clean Architecture with UseCases
 * Room database (CRUD operations)
