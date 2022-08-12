@@ -57,7 +57,7 @@ fun DashboardBottomNavBar(
                         alwaysShowLabel = false,
                         onClick = {
                             navController.navigate(destination.direction!!) {
-                                launchSingleTop = true
+
                             }
                         },
                         icon = {
