@@ -10,6 +10,6 @@ The UI was created using mockups done by Mateusz Winsław - https://www.linkedin
 
 ## Screenshots from the App
 * Main screen
-  ![Main screen](/screenshots/ss1.png "Main screen")
+  ![Main screen](/MobileBankAppUI/screenshots/ss1.png "Main screen")
 * Main screen continuation
-  ![Main screen continuation](/screenshots/ss2.png "Main screen continuation")
+  ![Main screen continuation](/MobileBankAppUI/screenshots/ss2.png "Main screen continuation")
