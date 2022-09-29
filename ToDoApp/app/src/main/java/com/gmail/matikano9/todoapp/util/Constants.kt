@@ -26,5 +26,15 @@ object Constants {
         const val SPLASH_DURATION = 2500L //in millis
     }
 
+    object Test {
+        const val TODO_TITLE = "title_test"
+        const val TODO_DESCRIPTION = "description_test"
+        const val UPDATED_TODO_TITLE = "updated_title_test"
+
+        const val TODO_TITLE_SEARCH_QUERY = "SSS"
+
+        const val TEST_DATABASE_NAME = "test_db"
+    }
+
 
 }
