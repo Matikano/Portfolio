@@ -21,14 +21,14 @@ class FakeToDoRepository : ToDoRepository {
     override fun getTask(taskId: Int): Flow<ToDoTask> = flow {
         tasks.find {
             it.id == taskId
-        }
+        }?.let { emit(it) }
     }
 
 
     override fun searchTasks(searchQuery: String): Flow<List<ToDoTask>>  = flow {
-        tasks.filter {
+        emit(tasks.filter {
             it.title.contains(searchQuery) || it.description.contains(searchQuery)
-        }
+        })
     }
 
     override suspend fun addTask(toDoTask: ToDoTask) {

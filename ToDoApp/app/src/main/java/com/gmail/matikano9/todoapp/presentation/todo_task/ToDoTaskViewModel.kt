@@ -24,13 +24,13 @@ import javax.inject.Inject
 class ToDoTaskViewModel  @Inject constructor(
     private val useCases: ToDoTaskUseCases,
     private val validationUseCases: ValidationUseCases,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle? = null
 ): ViewModel(){
 
     var toDoTask: ToDoTask? = null
 
     init {
-        toDoTask = savedStateHandle[NAV_ARG_TODO_TASK]
+        toDoTask = savedStateHandle?.get(NAV_ARG_TODO_TASK)
     }
 
     var state by mutableStateOf(ToDoTaskState(toDoTask = toDoTask))

@@ -6,18 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.4.1] - 2022-10-01
+
+### Added
+* unit test cases for all ToDo_List Use Cases
+* unit test cases for ToDoTaskViewModel
+* unit test cases for ToDoListViewModel
+
+* instrumented test cases for ValidateDate Use Case
+
+##Changed
+* made savedStateHandle nullable in ToDoTaskViewModel constructor to make it available for Unit Tests
+
+
 ## [0.4.0] - 2022-09-29
 
 ### Added
 * setup package structures for Unit Test and Instrumented Test
 
 * implemented FakeToDoRepository for Unit Tests
-* test cases for all Validation Use Cases
-* test cases for all Common Use Cases
-* test cases for all ToDo_Task Use Cases
+* unit test cases for all Validation Use Cases
+* unit test cases for all Common Use Cases
+* unit test cases for all ToDo_Task Use Cases
 
 * setup HiltTestRunner and TestAppModule in Instrumented Test package for proper testing with Dagger Hilt library
-* test cases for ToDoDao (testing special Test Instance of Room DB)
+* instrumented test cases for ToDoDao (testing special Test Instance of Room DB)
 
 ## [0.3.1] - 2022-06-24
 
