@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ComplimentApp</string>
+    <string name="compliment_notification_title">Your daily compliment!</string>
+</resources>
