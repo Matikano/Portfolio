@@ -20,7 +20,15 @@ class ComplimentViewModel @Inject constructor(
     var state by mutableStateOf(ComplimentState())
         private set
 
-    fun loadCompliment(
+
+    fun onEvent(event: ComplimentEvent){
+        when (event){
+            is ComplimentEvent.OnRefresh -> if (!state.isRefreshing) loadCompliment()
+            is ComplimentEvent.OnLoadCompliment -> loadCompliment(event.content)
+        }
+    }
+
+    private fun loadCompliment(
         content: String? = null
     ){
         if(content != null) {
@@ -35,7 +43,6 @@ class ComplimentViewModel @Inject constructor(
                     isLoading = true,
                     error = null
                 )
-
                 when (val result = repository.getCompliment()){
                     is Resource.Success -> {
                         state = state.copy(

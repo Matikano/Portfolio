@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,12 +24,13 @@ import com.matikano.complimentapp.presentation.ui.util.toGradient
 @Composable
 fun Compliment(
     modifier: Modifier = Modifier,
-    compliment: Compliment,
-    gradient: Brush = gradients.random().toGradient()
+    compliment: Compliment
 ) {
     Column(
-       modifier = modifier
-           .background(gradient)
+       modifier  = modifier
+           .fillMaxSize()
+           .verticalScroll(rememberScrollState())
+           .background(gradients.random().toGradient())
            .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally

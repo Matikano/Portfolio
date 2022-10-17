@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshState
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -22,7 +23,7 @@ import com.matikano.complimentapp.presentation.ui.util.toGradient
 
 @Composable
 fun ComplimentScreen(
-    viewModel: ComplimentViewModel
+    viewModel: ComplimentViewModel = hiltViewModel()
 ) {
 
     val state = viewModel.state
@@ -30,29 +31,40 @@ fun ComplimentScreen(
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing = state.isRefreshing),
         onRefresh = {
-            viewModel.loadCompliment()
+            viewModel.onEvent(ComplimentEvent.OnRefresh)
         }
     ) {
 
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ){
             state.compliment?.let { compliment ->
                 Compliment(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(rememberScrollState()),
-                    compliment = compliment,
-                    gradient = gradients.random().toGradient()
+                        .align(Alignment.Center),
+                    compliment = compliment
                 )
             }
-            if(state.isLoading || state.isRefreshing) {
-                CircularProgressIndicator()
+            if(state.isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                )
             }
             state.error?.let { error ->
                 Text(
+                    modifier = Modifier
+                        .align(Alignment.Center),
                     text = error,
                     color = Color.Red,
                     textAlign = TextAlign.Center,
                 )
             }
+        }
+
+
 
     }
 

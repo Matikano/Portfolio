@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.matikano.complimentapp.domain.compliment.Compliment
+import com.matikano.complimentapp.presentation.compliment.ComplimentEvent
 import com.matikano.complimentapp.presentation.compliment.ComplimentScreen
 import com.matikano.complimentapp.presentation.compliment.ComplimentViewModel
 import com.matikano.complimentapp.presentation.ui.theme.ComplimentAppTheme
@@ -29,11 +30,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         intentCompliment = intent.extras?.getString(EXTRA_KEY_COMPLIMENT)
-        viewModel.loadCompliment(intentCompliment)
+        viewModel.onEvent(ComplimentEvent.OnLoadCompliment(intentCompliment))
 
         setContent {
             ComplimentAppTheme {
-                ComplimentScreen(viewModel = viewModel)
+                ComplimentScreen(
+                    viewModel = viewModel
+                )
             }
         }
     }
