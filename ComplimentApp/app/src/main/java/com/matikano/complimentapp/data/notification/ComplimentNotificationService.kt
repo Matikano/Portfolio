@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.matikano.complimentapp.MainActivity
 import com.matikano.complimentapp.MainActivity.Companion.EXTRA_KEY_COMPLIMENT
@@ -21,11 +22,13 @@ class ComplimentNotificationService @Inject constructor(
 
     override fun showNotification(content: String) {
         val activityIntent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            Log.d("NotificationService", "${this.javaClass.name} showNotification: content = $content")
             putExtra(EXTRA_KEY_COMPLIMENT, content)
         }
         val activityPendingIntent = PendingIntent.getActivity(
             context,
-            REQUEST_CODE_GO_TO_ACTIVITY,
+            getRequestCode(),
             activityIntent,
             PendingIntent.FLAG_IMMUTABLE
         )
@@ -34,6 +37,7 @@ class ComplimentNotificationService @Inject constructor(
             .setSmallIcon(R.drawable.ic_compliment)
             .setContentTitle(context.getString(R.string.compliment_notification_title))
             .setContentText(content)
+            .setAutoCancel(true)
             .setContentIntent(activityPendingIntent)
             .build()
 
@@ -41,13 +45,14 @@ class ComplimentNotificationService @Inject constructor(
         notificationManager.notify(NOTIFICATION_ID, notification)
     }
 
+    private fun getRequestCode(): Int = (System.currentTimeMillis() + 1).toInt()
+
     companion object {
         const val COMPLIMENT_CHANNEL_ID = "compliment_channel"
         const val CHANNEL_DESCRIPTION = "Used for displaying daily compliment notifications"
         const val CHANNEL_NAME = "compliments"
 
         const val NOTIFICATION_ID = 1
-        const val REQUEST_CODE_GO_TO_ACTIVITY = 1
 
     }
 

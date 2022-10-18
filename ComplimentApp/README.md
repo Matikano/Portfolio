@@ -6,7 +6,7 @@
 * MVVM design pattern
 * Retrofit for Network calls (REST calls)
 * Dependency Injection with Dagger Hilt
-* WorkManager for scheduling periodic tasks
+* AlarmManager for executing periodic tasks at fixed time
 * JetPack Compose UI
 
 ### Screenshots from the App

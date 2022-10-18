@@ -1,6 +1,8 @@
 package com.matikano.complimentapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -19,6 +21,7 @@ import com.matikano.complimentapp.presentation.compliment.ComplimentScreen
 import com.matikano.complimentapp.presentation.compliment.ComplimentViewModel
 import com.matikano.complimentapp.presentation.ui.theme.ComplimentAppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.log
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -26,11 +29,19 @@ class MainActivity : ComponentActivity() {
     private val viewModel: ComplimentViewModel by viewModels()
     private var intentCompliment: String? = null
 
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        intentCompliment = intent.getStringExtra(EXTRA_KEY_COMPLIMENT)
+        Log.d("NotificationService", "${this.javaClass.name} onNewIntent: content = $intentCompliment")
+        viewModel.onEvent(ComplimentEvent.OnLoadCompliment(intentCompliment))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        intentCompliment = intent.extras?.getString(EXTRA_KEY_COMPLIMENT)
-        viewModel.onEvent(ComplimentEvent.OnLoadCompliment(intentCompliment))
+        if(intentCompliment == null){
+            viewModel.onEvent(ComplimentEvent.OnLoadCompliment())
+        }
 
         setContent {
             ComplimentAppTheme {

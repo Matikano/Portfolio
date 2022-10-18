@@ -20,7 +20,6 @@ class ComplimentViewModel @Inject constructor(
     var state by mutableStateOf(ComplimentState())
         private set
 
-
     fun onEvent(event: ComplimentEvent){
         when (event){
             is ComplimentEvent.OnRefresh -> if (!state.isRefreshing) loadCompliment()

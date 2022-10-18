@@ -1,68 +1,61 @@
 package com.matikano.complimentapp
 
+import android.app.AlarmManager
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
-import android.os.Build
-import androidx.work.*
+import android.content.Intent
+import android.icu.util.Calendar
+import com.matikano.complimentapp.data.local.NotificationPreferences
 import com.matikano.complimentapp.data.notification.ComplimentNotificationService
-import com.matikano.complimentapp.data.workers.ComplimentNotificationWorker
-import com.matikano.complimentapp.data.workers.ComplimentNotificationWorker.Companion.REMINDER_HOUR
-import com.matikano.complimentapp.data.workers.ComplimentNotificationWorkerFactory
-import com.matikano.complimentapp.presentation.ui.util.startOfTheDay
+import com.matikano.complimentapp.data.receivers.NotificationAlarmReceiver
 import dagger.hilt.android.HiltAndroidApp
 import java.time.Duration
-import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltAndroidApp
 class ComplimentApp: Application(){
 
     @Inject
-    lateinit var complimentNotificationWorkerFactory: ComplimentNotificationWorkerFactory
-
+    lateinit var notificationPreferences: NotificationPreferences
 
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
-        setUpWorkManager()
+        setUpAlarmManager()
     }
 
-    private fun setUpWorkManager() {
+    private fun setUpAlarmManager() {
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, notificationPreferences.reminderHour)
+            set(Calendar.MINUTE, notificationPreferences.reminderMinute)
+            set(Calendar.SECOND, 0)
+        }
 
-        WorkManager.initialize(
-            this,
-            Configuration.Builder()
-                .setWorkerFactory(complimentNotificationWorkerFactory)
-                .build()
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val thuReq = Calendar.getInstance().timeInMillis + 1 // creating unique request code
+        val requestCode = thuReq.toInt()
+
+        if(calendar.timeInMillis < System.currentTimeMillis()){
+            calendar.add(Calendar.DAY_OF_YEAR, 1)
+        }
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            requestCode,
+            Intent(applicationContext, NotificationAlarmReceiver::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+            },
+            PendingIntent.FLAG_IMMUTABLE
         )
 
-
-
-        val initialDelay =
-            if(LocalDateTime.now().hour < REMINDER_HOUR)
-                Duration.between(LocalDateTime.now(), LocalDateTime.now().startOfTheDay().plusHours(REMINDER_HOUR))
-            else
-                Duration.between(LocalDateTime.now(), LocalDateTime.now().startOfTheDay().plusDays(1).plusHours(REMINDER_HOUR))
-
-
-        val workManager = WorkManager.getInstance(applicationContext)
-        val dailyComplimentRequest = PeriodicWorkRequestBuilder<ComplimentNotificationWorker>(
-            Duration.ofDays(1)
-        )
-            .setConstraints(
-                Constraints.Builder()
-                    .setRequiredNetworkType(NetworkType.CONNECTED)
-                    .build()
-            )
-            .setInitialDelay(initialDelay)
-            .build()
-
-        workManager.enqueueUniquePeriodicWork(
-            "Daily compliments work",
-            ExistingPeriodicWorkPolicy.KEEP,
-            dailyComplimentRequest
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            Duration.ofHours(notificationPreferences.intervalInHours).toMillis(),
+            pendingIntent
         )
     }
 
@@ -78,6 +71,5 @@ class ComplimentApp: Application(){
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
-
     }
 }

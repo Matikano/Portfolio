@@ -1,4 +1,4 @@
-package com.matikano.complimentapp.di
+package com.matikano.complimentapp.di.modules
 
 import com.matikano.complimentapp.data.notification.ComplimentNotificationService
 import com.matikano.complimentapp.domain.notification.NotificationService
