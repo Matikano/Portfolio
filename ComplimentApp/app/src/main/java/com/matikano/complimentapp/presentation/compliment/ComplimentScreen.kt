@@ -29,12 +29,11 @@ fun ComplimentScreen(
     val state = viewModel.state
 
     SwipeRefresh(
-        state = rememberSwipeRefreshState(isRefreshing = state.isRefreshing),
+        state = rememberSwipeRefreshState(isRefreshing = state.isLoading),
         onRefresh = {
             viewModel.onEvent(ComplimentEvent.OnRefresh)
         }
     ) {
-
         Box(
             modifier = Modifier
                 .fillMaxSize(),
@@ -63,10 +62,5 @@ fun ComplimentScreen(
                 )
             }
         }
-
-
-
     }
-
-
 }

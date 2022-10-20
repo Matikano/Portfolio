@@ -8,10 +8,13 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
-import com.matikano.complimentapp.data.local.NotificationPreferences
-import com.matikano.complimentapp.data.notification.ComplimentNotificationService
+import com.matikano.complimentapp.data.local.NotificationSettingsDataStore
+import com.matikano.complimentapp.data.notification.ComplimentNotificationServiceImpl
 import com.matikano.complimentapp.data.receivers.NotificationAlarmReceiver
 import dagger.hilt.android.HiltAndroidApp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.Duration
 import javax.inject.Inject
 
@@ -19,7 +22,7 @@ import javax.inject.Inject
 class ComplimentApp: Application(){
 
     @Inject
-    lateinit var notificationPreferences: NotificationPreferences
+    lateinit var dataStore: NotificationSettingsDataStore
 
     override fun onCreate() {
         super.onCreate()
@@ -27,10 +30,10 @@ class ComplimentApp: Application(){
         setUpAlarmManager()
     }
 
-    private fun setUpAlarmManager() {
+    private fun setUpAlarmManager() = CoroutineScope(Dispatchers.IO).launch {
         val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, notificationPreferences.reminderHour)
-            set(Calendar.MINUTE, notificationPreferences.reminderMinute)
+            set(Calendar.HOUR_OF_DAY, dataStore.getReminderHour())
+            set(Calendar.MINUTE, dataStore.getReminderMinute())
             set(Calendar.SECOND, 0)
         }
 
@@ -54,7 +57,7 @@ class ComplimentApp: Application(){
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
-            Duration.ofHours(notificationPreferences.intervalInHours).toMillis(),
+            Duration.ofHours(dataStore.getIntervalInHours()).toMillis(),
             pendingIntent
         )
     }
@@ -62,11 +65,11 @@ class ComplimentApp: Application(){
     private fun createNotificationChannel() {
 
         val channel = NotificationChannel(
-            ComplimentNotificationService.COMPLIMENT_CHANNEL_ID,
-            ComplimentNotificationService.CHANNEL_NAME,
+            ComplimentNotificationServiceImpl.COMPLIMENT_CHANNEL_ID,
+            ComplimentNotificationServiceImpl.CHANNEL_NAME,
             NotificationManager.IMPORTANCE_DEFAULT
         ).apply {
-            description = ComplimentNotificationService.CHANNEL_DESCRIPTION
+            description = ComplimentNotificationServiceImpl.CHANNEL_DESCRIPTION
         }
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

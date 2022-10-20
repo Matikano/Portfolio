@@ -32,7 +32,6 @@ class MainActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         intentCompliment = intent.getStringExtra(EXTRA_KEY_COMPLIMENT)
-        Log.d("NotificationService", "${this.javaClass.name} onNewIntent: content = $intentCompliment")
         viewModel.onEvent(ComplimentEvent.OnLoadCompliment(intentCompliment))
     }
 

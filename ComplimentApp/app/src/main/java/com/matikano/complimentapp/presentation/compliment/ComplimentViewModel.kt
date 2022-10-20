@@ -22,7 +22,7 @@ class ComplimentViewModel @Inject constructor(
 
     fun onEvent(event: ComplimentEvent){
         when (event){
-            is ComplimentEvent.OnRefresh -> if (!state.isRefreshing) loadCompliment()
+            is ComplimentEvent.OnRefresh -> if (!state.isLoading) loadCompliment()
             is ComplimentEvent.OnLoadCompliment -> loadCompliment(event.content)
         }
     }

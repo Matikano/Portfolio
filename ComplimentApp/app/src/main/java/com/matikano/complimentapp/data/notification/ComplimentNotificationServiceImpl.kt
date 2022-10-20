@@ -4,27 +4,25 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.matikano.complimentapp.MainActivity
 import com.matikano.complimentapp.MainActivity.Companion.EXTRA_KEY_COMPLIMENT
 import com.matikano.complimentapp.R
-import com.matikano.complimentapp.domain.notification.NotificationService
+import com.matikano.complimentapp.domain.notification.ComplimentNotificationService
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class ComplimentNotificationService @Inject constructor(
+class ComplimentNotificationServiceImpl @Inject constructor(
     @ApplicationContext private val context: Context
-) : NotificationService {
+) : ComplimentNotificationService {
 
     private val notificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    override fun showNotification(content: String) {
+    override fun showNotification(notificationContent: String) {
         val activityIntent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-            Log.d("NotificationService", "${this.javaClass.name} showNotification: content = $content")
-            putExtra(EXTRA_KEY_COMPLIMENT, content)
+            putExtra(EXTRA_KEY_COMPLIMENT, notificationContent)
         }
         val activityPendingIntent = PendingIntent.getActivity(
             context,
@@ -36,7 +34,7 @@ class ComplimentNotificationService @Inject constructor(
         val notification = NotificationCompat.Builder(context, COMPLIMENT_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_compliment)
             .setContentTitle(context.getString(R.string.compliment_notification_title))
-            .setContentText(content)
+            .setContentText(notificationContent)
             .setAutoCancel(true)
             .setContentIntent(activityPendingIntent)
             .build()
@@ -53,7 +51,5 @@ class ComplimentNotificationService @Inject constructor(
         const val CHANNEL_NAME = "compliments"
 
         const val NOTIFICATION_ID = 1
-
     }
-
 }

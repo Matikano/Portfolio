@@ -77,6 +77,9 @@ dependencies {
     // WorkManager with Coroutines
     implementation "androidx.work:work-runtime-ktx:2.7.1"
 
+    // Preferences DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha04"
+
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
 
     implementation "com.google.accompanist:accompanist-swiperefresh:0.26.5-rc"
