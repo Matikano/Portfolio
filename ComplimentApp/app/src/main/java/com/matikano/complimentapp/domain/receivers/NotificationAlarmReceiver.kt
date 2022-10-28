@@ -1,9 +1,9 @@
-package com.matikano.complimentapp.data.receivers
+package com.matikano.complimentapp.domain.receivers
 
 import android.content.Context
 import android.content.Intent
-import com.matikano.complimentapp.domain.notification.ComplimentNotificationService
 import com.matikano.complimentapp.di.receivers.HiltBroadcastReceiver
+import com.matikano.complimentapp.domain.notification.ComplimentNotificationService
 import com.matikano.complimentapp.domain.repository.ComplimentRepository
 import com.matikano.complimentapp.domain.util.Resource
 import dagger.hilt.android.AndroidEntryPoint

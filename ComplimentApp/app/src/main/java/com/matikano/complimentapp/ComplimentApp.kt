@@ -10,7 +10,7 @@ import android.content.Intent
 import android.icu.util.Calendar
 import com.matikano.complimentapp.data.local.NotificationSettingsDataStore
 import com.matikano.complimentapp.data.notification.ComplimentNotificationServiceImpl
-import com.matikano.complimentapp.data.receivers.NotificationAlarmReceiver
+import com.matikano.complimentapp.domain.receivers.NotificationAlarmReceiver
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
