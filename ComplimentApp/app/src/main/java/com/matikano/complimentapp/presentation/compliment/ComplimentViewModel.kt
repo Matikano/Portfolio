@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.matikano.complimentapp.domain.compliment.Compliment
-import com.matikano.complimentapp.domain.repository.ComplimentRepository
+import com.matikano.complimentapp.domain.use_cases.compliment.GetComplimentUseCase
 import com.matikano.complimentapp.domain.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,13 +14,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ComplimentViewModel @Inject constructor(
-    private val repository: ComplimentRepository
+    private val getCompliment: GetComplimentUseCase
 ): ViewModel() {
 
     var state by mutableStateOf(ComplimentState())
         private set
 
-    fun onEvent(event: ComplimentEvent){
+    fun onEvent(event: ComplimentEvent) {
         when (event){
             is ComplimentEvent.OnRefresh -> if (!state.isLoading) loadCompliment()
             is ComplimentEvent.OnLoadCompliment -> loadCompliment(event.content)
@@ -29,7 +29,7 @@ class ComplimentViewModel @Inject constructor(
 
     private fun loadCompliment(
         content: String? = null
-    ){
+    ) {
         if(content != null) {
             state = state.copy(
                 compliment = Compliment(content),
@@ -42,21 +42,21 @@ class ComplimentViewModel @Inject constructor(
                     isLoading = true,
                     error = null
                 )
-                when (val result = repository.getCompliment()){
-                    is Resource.Success -> {
+                when (val result = getCompliment()) {
+                    is Resource.Success ->
                         state = state.copy(
                             compliment = result.data,
                             isLoading = false,
                             error = null
                         )
-                    }
-                    is Resource.Error -> {
+
+                    is Resource.Error ->
                         state = state.copy(
                             compliment = null,
                             isLoading = false,
                             error = result.message
                         )
-                    }
+
                 }
             }
         }
