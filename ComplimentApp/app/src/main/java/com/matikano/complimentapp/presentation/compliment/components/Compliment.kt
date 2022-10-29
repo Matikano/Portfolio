@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.matikano.complimentapp.domain.compliment.Compliment
 import com.matikano.complimentapp.presentation.ui.theme.gradients
-import com.matikano.complimentapp.presentation.ui.util.setGradient
 import com.matikano.complimentapp.presentation.ui.util.toGradient
 
 @Composable
@@ -30,7 +29,6 @@ fun Compliment(
        modifier  = modifier
            .fillMaxSize()
            .verticalScroll(rememberScrollState())
-           .background(gradients.random().toGradient())
            .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally

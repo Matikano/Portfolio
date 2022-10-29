@@ -1,13 +1,14 @@
-package com.matikano.complimentapp.data.local
+package com.matikano.complimentapp.data.preferences
 
 import android.content.Context
 import androidx.datastore.preferences.core.preferencesKey
+import com.matikano.complimentapp.di.preferences.Preferences
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class NotificationSettingsDataStore @Inject constructor(
     @ApplicationContext context: Context
-): BaseDataStore(context) {
+): BaseDataStore(context), Preferences {
 
     override val name: String = DS_NAME
 
@@ -16,14 +17,14 @@ class NotificationSettingsDataStore @Inject constructor(
     private val intervalKey = preferencesKey<Long>(DS_KEY_INTERVAL_IN_HOURS)
 
     // getters
-    suspend fun getReminderHour(): Int = get(reminderHourKey) ?: 8 // returns saved value or default one
-    suspend fun getReminderMinute(): Int = get(reminderMinuteKey) ?: 0
-    suspend fun getIntervalInHours(): Long = get(intervalKey) ?: 24
+    override suspend fun getReminderHour(): Int = get(reminderHourKey) ?: 8 // returns saved value or default one
+    override suspend fun getReminderMinute(): Int = get(reminderMinuteKey) ?: 0
+    override suspend fun getIntervalInHours(): Long = get(intervalKey) ?: 24
 
     // setters
-    suspend fun saveReminderHour(hour: Int) = set(reminderHourKey, hour)
-    suspend fun saveReminderMinute(minute: Int) = set(reminderMinuteKey, minute)
-    suspend fun saveInterval(hours: Long) = set(intervalKey, hours)
+    override suspend fun saveReminderHour(hour: Int) = set(reminderHourKey, hour)
+    override suspend fun saveReminderMinute(minute: Int) = set(reminderMinuteKey, minute)
+    override suspend fun saveIntervalInHours(hours: Long) = set(intervalKey, hours)
 
 
     companion object {

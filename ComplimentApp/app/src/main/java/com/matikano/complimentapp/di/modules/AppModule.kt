@@ -2,7 +2,6 @@ package com.matikano.complimentapp.di.modules
 
 import android.content.Context
 import com.matikano.complimentapp.data.remote.ComplimentApi
-import com.matikano.complimentapp.util.Constants.API.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +20,7 @@ object AppModule {
     @Singleton
     fun provideComplimentApi(): ComplimentApi =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(ComplimentApi.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create()

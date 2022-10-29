@@ -7,4 +7,8 @@ interface ComplimentApi {
 
     @GET("api")
     suspend fun getCompliment(): ComplimentDto
+
+    companion object {
+        const val BASE_URL = "https://complimentr.com/"
+    }
 }

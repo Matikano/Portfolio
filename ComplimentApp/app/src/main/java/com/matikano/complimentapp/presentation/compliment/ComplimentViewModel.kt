@@ -8,7 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.matikano.complimentapp.domain.compliment.Compliment
 import com.matikano.complimentapp.domain.use_cases.compliment.GetComplimentUseCase
 import com.matikano.complimentapp.domain.util.Resource
+import com.matikano.complimentapp.navigation.Screens
+import com.matikano.complimentapp.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,10 +24,20 @@ class ComplimentViewModel @Inject constructor(
     var state by mutableStateOf(ComplimentState())
         private set
 
+<<<<<<< Updated upstream
     fun onEvent(event: ComplimentEvent) {
+=======
+    private val _uiEvent = Channel<UiEvent>()
+    val uiEvent = _uiEvent.receiveAsFlow()
+
+    fun onEvent(event: ComplimentEvent){
+>>>>>>> Stashed changes
         when (event){
             is ComplimentEvent.OnRefresh -> if (!state.isLoading) loadCompliment()
             is ComplimentEvent.OnLoadCompliment -> loadCompliment(event.content)
+            is ComplimentEvent.OnSettingsClicked -> viewModelScope.launch {
+                _uiEvent.send(UiEvent.Navigate(Screens.SETTINGS))
+            }
         }
     }
 
