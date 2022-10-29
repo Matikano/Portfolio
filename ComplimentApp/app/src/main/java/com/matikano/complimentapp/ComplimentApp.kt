@@ -5,12 +5,8 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import com.matikano.complimentapp.data.notification.ComplimentNotificationServiceImpl
-<<<<<<< Updated upstream
-import com.matikano.complimentapp.domain.receivers.NotificationAlarmReceiver
-=======
-import com.matikano.complimentapp.di.preferences.Preferences
+import com.matikano.complimentapp.domain.notification.preferences.Preferences
 import com.matikano.complimentapp.util.extenstions.scheduleNotifications
->>>>>>> Stashed changes
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 

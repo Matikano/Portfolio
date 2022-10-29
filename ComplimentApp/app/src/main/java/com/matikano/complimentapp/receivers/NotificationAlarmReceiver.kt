@@ -1,4 +1,4 @@
-package com.matikano.complimentapp.domain.receivers
+package com.matikano.complimentapp.receivers
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,9 @@ import com.matikano.complimentapp.domain.notification.ComplimentNotificationServ
 import com.matikano.complimentapp.domain.repository.ComplimentRepository
 import com.matikano.complimentapp.domain.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint

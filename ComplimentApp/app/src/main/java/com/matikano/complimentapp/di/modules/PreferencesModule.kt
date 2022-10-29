@@ -1,7 +1,7 @@
 package com.matikano.complimentapp.di.modules
 
 import com.matikano.complimentapp.data.preferences.NotificationSettingsDataStore
-import com.matikano.complimentapp.di.preferences.Preferences
+import com.matikano.complimentapp.domain.notification.preferences.Preferences
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

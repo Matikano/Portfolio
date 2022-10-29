@@ -1,4 +1,4 @@
-package com.matikano.complimentapp.di.preferences
+package com.matikano.complimentapp.domain.notification.preferences
 
 interface Preferences {
     suspend fun getReminderHour(): Int

@@ -1,6 +1,6 @@
 package com.matikano.complimentapp.di.modules
 
-import com.matikano.complimentapp.di.preferences.Preferences
+import com.matikano.complimentapp.domain.notification.preferences.Preferences
 import com.matikano.complimentapp.domain.use_cases.settings.GetNotificationReminderSettingsUseCase
 import com.matikano.complimentapp.domain.use_cases.settings.SaveNotificationReminderSettingsUseCase
 import com.matikano.complimentapp.domain.use_cases.settings.SettingsUseCases

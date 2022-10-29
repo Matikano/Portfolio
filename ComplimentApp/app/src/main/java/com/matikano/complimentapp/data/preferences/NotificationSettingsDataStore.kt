@@ -2,7 +2,7 @@ package com.matikano.complimentapp.data.preferences
 
 import android.content.Context
 import androidx.datastore.preferences.core.preferencesKey
-import com.matikano.complimentapp.di.preferences.Preferences
+import com.matikano.complimentapp.domain.notification.preferences.Preferences
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
