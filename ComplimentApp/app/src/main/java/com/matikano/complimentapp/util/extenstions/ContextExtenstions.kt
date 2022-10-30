@@ -5,7 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
-import com.matikano.complimentapp.domain.notification.preferences.Preferences
+import com.matikano.complimentapp.domain.preferences.Preferences
 import com.matikano.complimentapp.receivers.NotificationAlarmReceiver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

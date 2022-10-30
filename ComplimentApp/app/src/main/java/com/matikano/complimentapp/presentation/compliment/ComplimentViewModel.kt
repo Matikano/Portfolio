@@ -24,14 +24,10 @@ class ComplimentViewModel @Inject constructor(
     var state by mutableStateOf(ComplimentState())
         private set
 
-<<<<<<< Updated upstream
-    fun onEvent(event: ComplimentEvent) {
-=======
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun onEvent(event: ComplimentEvent){
->>>>>>> Stashed changes
         when (event){
             is ComplimentEvent.OnRefresh -> if (!state.isLoading) loadCompliment()
             is ComplimentEvent.OnLoadCompliment -> loadCompliment(event.content)
@@ -70,7 +66,6 @@ class ComplimentViewModel @Inject constructor(
                             isLoading = false,
                             error = result.message
                         )
-
                 }
             }
         }
