@@ -66,7 +66,6 @@ class ComplimentViewModel @Inject constructor(
                             isLoading = false,
                             error = result.message
                         )
-
                 }
             }
         }

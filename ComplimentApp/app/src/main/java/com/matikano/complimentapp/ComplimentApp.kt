@@ -5,7 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import com.matikano.complimentapp.data.notification.ComplimentNotificationServiceImpl
-import com.matikano.complimentapp.domain.notification.preferences.Preferences
+import com.matikano.complimentapp.domain.preferences.Preferences
 import com.matikano.complimentapp.util.extenstions.scheduleNotifications
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
