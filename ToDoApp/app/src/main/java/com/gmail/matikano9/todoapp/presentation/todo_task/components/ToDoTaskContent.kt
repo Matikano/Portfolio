@@ -89,7 +89,7 @@ fun ToDoTaskContent(
 
             val calendar = Calendar.getInstance()
 
-            val year: Int  = calendar.get(Calendar.YEAR)
+            val year: Int = calendar.get(Calendar.YEAR)
             val month: Int = calendar.get(Calendar.MONTH)
             val day: Int = calendar.get(Calendar.DAY_OF_MONTH)
 
@@ -102,8 +102,8 @@ fun ToDoTaskContent(
                 { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
                     onEvent(
                         ToDoTaskEvent.OnDueDateChanged(
-                        LocalDate.of(year, month+1, dayOfMonth)
-                    )
+                            LocalDate.of(year, month + 1, dayOfMonth)
+                        )
                     )
                 }, year, month, day
             )
@@ -113,8 +113,8 @@ fun ToDoTaskContent(
                 { _: TimePicker, hour: Int, minute: Int ->
                     onEvent(
                         ToDoTaskEvent.OnDueTimeChanged(
-                        LocalTime.of(hour, minute)
-                    )
+                            LocalTime.of(hour, minute)
+                        )
                     )
 
                 }, hour, minute, true
@@ -132,8 +132,8 @@ fun ToDoTaskContent(
                 onTextChanged = { dueDateString ->
                     onEvent(
                         ToDoTaskEvent.OnDueDateChanged(
-                        LocalDate.parse(dueDateString)
-                    )
+                            LocalDate.parse(dueDateString)
+                        )
                     )
                 },
                 singleLine = true,

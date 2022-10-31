@@ -5,7 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -13,9 +14,12 @@ import com.matikano.complimentapp.navigation.Screens
 import com.matikano.complimentapp.presentation.compliment.ComplimentEvent
 import com.matikano.complimentapp.presentation.compliment.ComplimentScreen
 import com.matikano.complimentapp.presentation.compliment.ComplimentViewModel
+import com.matikano.complimentapp.presentation.settings.SettingsScreen
 import com.matikano.complimentapp.presentation.ui.theme.ComplimentAppTheme
 import com.matikano.complimentapp.util.extenstions.navigate
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -39,6 +43,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComplimentAppTheme {
                 val navController = rememberNavController()
+                val scaffoldState = rememberScaffoldState()
                 NavHost(
                     navController = navController,
                     startDestination = Screens.COMPLIMENT
@@ -51,10 +56,16 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(route = Screens.SETTINGS) {
-                        Text(text = "SETTINGS")
+                        SettingsScreen(
+                            navController = navController,
+                            showSnackBar = { content -> viewModel.viewModelScope.launch {
+                                    delay(300)
+                                    scaffoldState.snackbarHostState.showSnackbar(content)
+                                }
+                            }
+                        )
                     }
                 }
-
             }
         }
     }

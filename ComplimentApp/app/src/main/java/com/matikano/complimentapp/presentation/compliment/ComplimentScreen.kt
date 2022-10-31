@@ -3,26 +3,22 @@ package com.matikano.complimentapp.presentation.compliment
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.SwipeRefreshState
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.matikano.complimentapp.presentation.compliment.components.Compliment
 import com.matikano.complimentapp.presentation.compliment.components.SettingsButton
 import com.matikano.complimentapp.presentation.ui.theme.gradients
 import com.matikano.complimentapp.presentation.ui.util.toGradient
-import com.matikano.complimentapp.util.UiEvent
+import com.matikano.complimentapp.presentation.util.UiEvent
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -31,10 +27,12 @@ fun ComplimentScreen(
     viewModel: ComplimentViewModel = hiltViewModel()
 ) {
     val state = viewModel.state
+    val scaffoldState = rememberScaffoldState()
     LaunchedEffect(key1 = true){
         viewModel.uiEvent.collect { event ->
             when(event){
                 is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.ShowSnackBar -> scaffoldState.snackbarHostState.showSnackbar(event.content)
                 else -> Unit
             }
         }

@@ -34,9 +34,6 @@ class NotificationAlarmReceiver: HiltBroadcastReceiver() {
                 }
                 is Resource.Error -> return@launch
             }
-
         }
-
     }
-
 }

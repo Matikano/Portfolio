@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.matikano.complimentapp.navigation.Screens
-import com.matikano.complimentapp.util.UiEvent
+import com.matikano.complimentapp.presentation.util.UiEvent
 
 @Composable
 fun SettingsButton(

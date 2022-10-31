@@ -10,14 +10,14 @@ data class NotificationReminderSettings(
 
 fun NotificationReminderSettings.toState(): SettingsState =
     SettingsState(
-        hour = hour,
-        minute = minute,
-        intervalInHours = intervalInHours
+        hour = hour.toString(),
+        minute = minute.toString(),
+        intervalInHours = intervalInHours.toString()
     )
 
 fun SettingsState.toNotificationReminderSettings(): NotificationReminderSettings =
     NotificationReminderSettings(
-        hour = hour,
-        minute = minute,
-        intervalInHours = intervalInHours
+        hour = hour.toInt(),
+        minute = minute.toInt(),
+        intervalInHours = intervalInHours.toLong()
     )

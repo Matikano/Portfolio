@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.matikano.complimentapp.domain.use_cases.settings.SettingsUseCases
 import com.matikano.complimentapp.domain.use_cases.settings.toNotificationReminderSettings
 import com.matikano.complimentapp.domain.use_cases.settings.toState
-import com.matikano.complimentapp.util.UiEvent
+import com.matikano.complimentapp.presentation.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -35,17 +35,15 @@ class SettingsViewModel @Inject constructor (
 
     fun onEvent(event: SettingsEvent) {
         when(event){
-            is SettingsEvent.OnDatePickerClick -> TODO()
-
             is SettingsEvent.OnIntervalChanged ->
                 state = state.copy(
-                    intervalInHours = event.intervalInHours
+                    intervalInHours = event.intervalInHours.toString()
                 )
 
             is SettingsEvent.OnDatePicked ->
                 state = state.copy(
-                    hour = event.hour,
-                    minute = event.minute
+                    hour = event.hour.toString(),
+                    minute = event.minute.toString()
                 )
 
             is SettingsEvent.OnSaveClick -> viewModelScope.launch {
