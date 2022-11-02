@@ -11,3 +11,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Project initialization
 * Setup multi-modular project architecture and structure (dependencies, modules, module inheritance, buildSrc)
 * `WelcomeScreen` in `onboarding_presentation` module
+* `Dimensions` class in `core-ui` module that provides re-usable cross-project values for spacing (padding)
+* `strings.xml` in `core` module that provides all cross-project needed string resources 
