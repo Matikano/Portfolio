@@ -14,14 +14,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.matikano.core_ui.LocalSpacing
 import com.matikano.core.R
+import com.matikano.core.navigation.Screens
+import com.matikano.core.util.UiEvent
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(
+    onNavigate: (UiEvent.Navigate) -> Unit
+) {
     val spacing = LocalSpacing.current
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(spacing.spaceSmall),
+            .padding(spacing.spaceMedium),
       
     ) {
         Text(
@@ -33,16 +37,16 @@ fun WelcomeScreen() {
         )
         Button(
             onClick = {
-            // TODO: Navigation on click
+                onNavigate(UiEvent.Navigate(Screens.GENDER))
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
         ) {
             Text(
-                text = stringResource(id = R.string.next),
+                text = stringResource(id = R.string.next).uppercase(),
                 color = MaterialTheme.colors.onPrimary,
-                modifier = Modifier.padding(spacing.spaceMedium)
+                modifier = Modifier.padding(spacing.spaceSmall)
             )
         }
     }
