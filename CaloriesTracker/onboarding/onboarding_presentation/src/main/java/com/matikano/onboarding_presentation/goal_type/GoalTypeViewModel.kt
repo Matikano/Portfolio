@@ -1,4 +1,4 @@
-package com.matikano.onboarding_presentation.goal
+package com.matikano.onboarding_presentation.goal_type
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.matikano.core.navigation.Screens
 import com.matikano.core.util.UiEvent
-import com.matikano.onboarding_domain.use_case.goal.GoalUseCases
+import com.matikano.onboarding_domain.use_case.goal_type.GoalTypeUseCases
 import javax.inject.Inject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -15,26 +15,36 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class GoalViewModel @Inject constructor (
-    private val useCases: GoalUseCases
+class GoalTypeViewModel @Inject constructor (
+    private val useCases: GoalTypeUseCases
 ): ViewModel() {
 
-    var state by mutableStateOf(GoalState())
+    var state by mutableStateOf(GoalTypeState())
         private set
 
     private var _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onEvent(event: GoalEvent) {
+    init {
+        state = state.copy(
+            goalType = useCases.loadUserInfo().goalType
+        )
+    }
+
+    fun onEvent(event: GoalTypeEvent) {
         when(event){
-            is GoalEvent.OnGoalTypeClick ->
+            is GoalTypeEvent.OnGoalTypeClickType ->
                 state = state.copy(
                     goalType = event.goalType
                 )
 
-            is GoalEvent.OnNextClick -> viewModelScope.launch {
-                useCases.saveGoal(state.goalType)
+            is GoalTypeEvent.OnNextClick -> viewModelScope.launch {
+                useCases.saveGoalType(state.goalType)
                 _uiEvent.send(UiEvent.Navigate(Screens.ACTIVITY))
+            }
+
+            is GoalTypeEvent.OnNavigateBackClick -> viewModelScope.launch {
+                _uiEvent.send(UiEvent.PopBackStack)
             }
         }
     }

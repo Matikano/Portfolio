@@ -12,19 +12,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewModelScope
 import com.matikano.core.util.UiEvent
 import com.matikano.core_ui.LocalSpacing
 import com.matikano.core.R
 import com.matikano.core.domain.model.Gender
 import com.matikano.core.navigation.Screens
+import com.matikano.onboarding_presentation.components.OnBoardingTopBar
 import com.matikano.onboarding_presentation.components.SelectableButton
 import com.matikano.onboarding_presentation.components.UnitTextField
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @Composable
 fun AgeScreen(
     onNavigate: (UiEvent.Navigate) -> Unit,
+    onPopBackStack: () -> Unit,
     viewModel: AgeViewModel = hiltViewModel(),
     scaffoldState: ScaffoldState
 ) {
@@ -41,48 +46,64 @@ fun AgeScreen(
                         event.message.asString(context)
                     )
                 }
-                else -> Unit
+                is UiEvent.PopBackStack -> onPopBackStack()
             }
         }
     }
 
-    Box(
+    Scaffold(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(spacing.spaceMedium)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(id = R.string.whats_your_age),
-                style = MaterialTheme.typography.h3
-            )
-            Spacer(modifier = Modifier.height(spacing.spaceMedium))
-            UnitTextField(
-                value = state.age,
-                onValueChange = { age ->
-                    viewModel.onEvent(AgeEvent.OnAgeChanged(age))
+            .fillMaxSize(),
+        scaffoldState = scaffoldState,
+        topBar = {
+            OnBoardingTopBar(
+                onNavigateBackClicked = {
+                    viewModel.onEvent(AgeEvent.OnNavigateBackClick)
                 },
-                unit = stringResource(id = R.string.years)
+                title = stringResource(id = R.string.age)
             )
         }
-        Button(
-            onClick = {
-                viewModel.onEvent(AgeEvent.OnNextClick)
-            },
+    ) {
+
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
+                .fillMaxSize()
+                .padding(spacing.spaceMedium)
         ) {
-            Text(
-                text = stringResource(id = R.string.next).uppercase(),
-                color = MaterialTheme.colors.onPrimary,
-                modifier = Modifier.padding(spacing.spaceSmall)
-            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .absoluteOffset(y = -spacing.topAppBarHeight),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = stringResource(id = R.string.whats_your_age),
+                    style = MaterialTheme.typography.h3
+                )
+                Spacer(modifier = Modifier.height(spacing.spaceMedium))
+                UnitTextField(
+                    value = state.age,
+                    onValueChange = { age ->
+                        viewModel.onEvent(AgeEvent.OnAgeChanged(age))
+                    },
+                    unit = stringResource(id = R.string.years)
+                )
+            }
+            Button(
+                onClick = {
+                    viewModel.onEvent(AgeEvent.OnNextClick)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.next).uppercase(),
+                    color = MaterialTheme.colors.onPrimary,
+                    modifier = Modifier.padding(spacing.spaceSmall)
+                )
+            }
         }
     }
 }

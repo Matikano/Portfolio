@@ -30,10 +30,16 @@ class AgeViewModel @Inject constructor (
     private var _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
+    init {
+        state = state.copy(
+            age = useCases.loadUserInfo().age.toString()
+        )
+    }
+
     fun onEvent(event: AgeEvent) {
-        when(event){
+        when(event) {
             is AgeEvent.OnAgeChanged -> {
-                if(state.age.length <= 2) {
+                if(event.age.length <= 2) {
                     state = state.copy(
                         age = useCases.filterOutDigits(event.age)
                     )
@@ -50,6 +56,9 @@ class AgeViewModel @Inject constructor (
                }
                 useCases.saveAge(age)
                 _uiEvent.send(UiEvent.Navigate(Screens.HEIGHT))
+            }
+            is AgeEvent.OnNavigateBackClick -> viewModelScope.launch {
+                _uiEvent.send(UiEvent.PopBackStack)
             }
         }
     }

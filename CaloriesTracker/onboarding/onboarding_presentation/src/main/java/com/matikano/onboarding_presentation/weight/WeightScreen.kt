@@ -1,10 +1,7 @@
 package com.matikano.onboarding_presentation.weight
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -15,12 +12,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.matikano.core.R
 import com.matikano.core.util.UiEvent
 import com.matikano.core_ui.LocalSpacing
+import com.matikano.onboarding_presentation.components.OnBoardingTopBar
 import com.matikano.onboarding_presentation.components.UnitTextField
 import kotlinx.coroutines.flow.collect
 
 @Composable
 fun WeightScreen(
     onNavigate: (UiEvent.Navigate) -> Unit,
+    onPopBackStack: () -> Unit,
     viewModel: WeightViewModel = hiltViewModel(),
     scaffoldState: ScaffoldState
 ) {
@@ -37,48 +36,62 @@ fun WeightScreen(
                         event.message.asString(context)
                     )
                 }
-                else -> Unit
+                is UiEvent.PopBackStack -> onPopBackStack()
             }
         }
     }
 
-    Box(
+    Scaffold(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(spacing.spaceMedium)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(id = R.string.whats_your_weight),
-                style = MaterialTheme.typography.h3
-            )
-            Spacer(modifier = Modifier.height(spacing.spaceMedium))
-            UnitTextField(
-                value = state.weight,
-                onValueChange = { weight ->
-                    viewModel.onEvent(WeightEvent.OnWeightChange(weight))
-                },
-                unit = stringResource(id = R.string.kg)
+            .fillMaxSize(),
+        scaffoldState = scaffoldState,
+        topBar = {
+            OnBoardingTopBar(
+                onNavigateBackClicked = { viewModel.onEvent(WeightEvent.OnNavigateBack) },
+                title = stringResource(id = R.string.weight)
             )
         }
-        Button(
-            onClick = {
-                viewModel.onEvent(WeightEvent.OnNextClick)
-            },
+    ) {
+
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
+                .fillMaxSize()
+                .padding(spacing.spaceMedium)
         ) {
-            Text(
-                text = stringResource(id = R.string.next).uppercase(),
-                color = MaterialTheme.colors.onPrimary,
-                modifier = Modifier.padding(spacing.spaceSmall)
-            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .absoluteOffset(y = -spacing.topAppBarHeight),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = stringResource(id = R.string.whats_your_weight),
+                    style = MaterialTheme.typography.h3
+                )
+                Spacer(modifier = Modifier.height(spacing.spaceMedium))
+                UnitTextField(
+                    value = state.weight,
+                    onValueChange = { weight ->
+                        viewModel.onEvent(WeightEvent.OnWeightChange(weight))
+                    },
+                    unit = stringResource(id = R.string.kg)
+                )
+            }
+            Button(
+                onClick = {
+                    viewModel.onEvent(WeightEvent.OnNextClick)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.next).uppercase(),
+                    color = MaterialTheme.colors.onPrimary,
+                    modifier = Modifier.padding(spacing.spaceSmall)
+                )
+            }
         }
     }
 }

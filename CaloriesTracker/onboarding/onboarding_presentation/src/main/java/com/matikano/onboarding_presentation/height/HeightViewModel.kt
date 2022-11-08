@@ -27,6 +27,12 @@ class HeightViewModel @Inject constructor (
     private var _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
+    init {
+        state = state.copy(
+            height = useCases.loadUserInfo().height.toString()
+        )
+    }
+
     fun onEvent(event: HeightEvent) {
         when(event){
             is HeightEvent.OnHeightChanged -> {
@@ -47,6 +53,9 @@ class HeightViewModel @Inject constructor (
                 }
                 useCases.saveHeight(height)
                 _uiEvent.send(UiEvent.Navigate(Screens.WEIGHT))
+            }
+            is HeightEvent.OnNavigateBackClick -> viewModelScope.launch {
+                _uiEvent.send(UiEvent.PopBackStack)
             }
         }
     }

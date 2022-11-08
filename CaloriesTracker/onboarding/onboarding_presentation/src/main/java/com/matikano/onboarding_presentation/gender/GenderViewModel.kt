@@ -28,6 +28,12 @@ class GenderViewModel @Inject constructor (
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
+    init {
+        state = state.copy(
+            gender = useCases.loadUserInfo().gender
+        )
+    }
+
     fun onEvent(event: GenderEvent){
        when(event) {
            is GenderEvent.OnGenderClicked ->
@@ -37,6 +43,9 @@ class GenderViewModel @Inject constructor (
            is GenderEvent.OnNextClick -> viewModelScope.launch {
                useCases.saveGender(state.gender)
                _uiEvent.send(UiEvent.Navigate(Screens.AGE))
+           }
+           is GenderEvent.OnNavigateBackClick -> viewModelScope.launch {
+               _uiEvent.send(UiEvent.PopBackStack)
            }
        }
     }

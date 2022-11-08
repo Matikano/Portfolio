@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2022-11-08
+
+### Added
+* Implementation of the rest of the onBoarding module screens: `NutrientsGoalScreen`, `SummaryScreen` with their respective `State`, `Event` classes and `UseCases`
+* Compose components for `SummaryScreen`
+* Scaffold with transparent `TopAppBar` in each of the onBoarding Screens with implementation of `OnNavigateBackClick` in `Event` classes
+* Propagating `UserInfo` data in each OnBoarding Screen (to remember user changes while navigating back and forth)
+
+### Changed
+* Moved DI module regarding onBoarding module to `onboarding_domain`
+* Fixed bug in `AgeScreen` TextField
+* Code clean-up (regarding DI modules)
+
 ## [0.1.1] - 2022-11-03
 
 ### Added

@@ -2,17 +2,21 @@ package com.matikano.onboarding_presentation.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LastBaseline
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
 import com.matikano.core_ui.LocalSpacing
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun UnitTextField(
     value: String,
@@ -25,6 +29,7 @@ fun UnitTextField(
     )
 ) {
     val spacing = LocalSpacing.current
+    val keyboardController = LocalSoftwareKeyboardController.current
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.Center
@@ -34,8 +39,11 @@ fun UnitTextField(
             onValueChange = onValueChange,
             textStyle = textStyle,
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
+                keyboardType = KeyboardType.Number,
             ),
+            keyboardActions = KeyboardActions {
+                keyboardController?.hide()
+            },
             singleLine = true,
             modifier = Modifier
                 .width(IntrinsicSize.Min)

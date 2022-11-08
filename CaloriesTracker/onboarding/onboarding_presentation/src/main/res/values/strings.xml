@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="next">Next</string>
+    <string name="activity_level">Activity level</string>
+    <string name="height">Height</string>
+    <string name="personal_info">Check your personal info</string>
 </resources>

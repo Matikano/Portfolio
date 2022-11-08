@@ -25,8 +25,14 @@ class ActivityViewModel @Inject constructor (
     private var _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
+    init {
+        state = state.copy(
+            activityLevel = useCases.loadUserInfo().activityLevel
+        )
+    }
+
     fun onEvent(event: ActivityEvent) {
-        when(event){
+        when(event) {
             is ActivityEvent.OnActivityClick ->
                 state = state.copy(
                     activityLevel = event.level
@@ -35,6 +41,9 @@ class ActivityViewModel @Inject constructor (
             is ActivityEvent.OnNextClick -> viewModelScope.launch {
                 useCases.saveActivity(state.activityLevel)
                 _uiEvent.send(UiEvent.Navigate(Screens.NUTRIENT_GOAL))
+            }
+            is ActivityEvent.OnNavigateBackClick -> viewModelScope.launch {
+                _uiEvent.send(UiEvent.PopBackStack)
             }
         }
     }

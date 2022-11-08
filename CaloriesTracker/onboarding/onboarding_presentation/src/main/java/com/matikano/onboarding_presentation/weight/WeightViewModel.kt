@@ -27,8 +27,14 @@ class WeightViewModel @Inject constructor (
     private var _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
+    init {
+        state = state.copy(
+            weight = useCases.loadUserInfo().weight.toString()
+        )
+    }
+
     fun onEvent(event: WeightEvent) {
-        when(event){
+        when(event) {
             is WeightEvent.OnNextClick -> viewModelScope.launch {
                 val weight = state.weight.toFloatOrNull() ?: kotlin.run {
                     _uiEvent.send(
@@ -47,6 +53,9 @@ class WeightViewModel @Inject constructor (
                         weight = event.weight
                     )
                 }
+            }
+            is WeightEvent.OnNavigateBack -> viewModelScope.launch {
+                _uiEvent.send(UiEvent.PopBackStack)
             }
         }
     }

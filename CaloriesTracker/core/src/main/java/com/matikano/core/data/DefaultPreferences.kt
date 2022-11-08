@@ -72,15 +72,15 @@ class DefaultPreferences @Inject constructor(
     }
 
     override fun loadUserInfo(): UserInfo {
-        val age = sharedPref.getInt(Preferences.KEY_AGE, -1)
-        val height = sharedPref.getInt(Preferences.KEY_HEIGHT, -1)
-        val weight = sharedPref.getFloat(Preferences.KEY_WEIGHT, -1f)
+        val age = sharedPref.getInt(Preferences.KEY_AGE, 20)
+        val height = sharedPref.getInt(Preferences.KEY_HEIGHT, 170)
+        val weight = sharedPref.getFloat(Preferences.KEY_WEIGHT, 80f)
         val genderString = sharedPref.getString(Preferences.KEY_GENDER, null)
         val activityLevelString = sharedPref.getString(Preferences.KEY_ACTIVITY_LEVEL, null)
         val goalType = sharedPref.getString(Preferences.KEY_GOAL_TYPE, null)
-        val carbRatio = sharedPref.getFloat(Preferences.KEY_CARBS_RATIO, -1f)
-        val proteinRatio = sharedPref.getFloat(Preferences.KEY_PROTEIN_RATIO, -1f)
-        val fatRatio = sharedPref.getFloat(Preferences.KEY_FAT_RATIO, -1f)
+        val carbRatio = sharedPref.getFloat(Preferences.KEY_CARBS_RATIO, 0.4f)
+        val proteinRatio = sharedPref.getFloat(Preferences.KEY_PROTEIN_RATIO, 0.3f)
+        val fatRatio = sharedPref.getFloat(Preferences.KEY_FAT_RATIO, 0.3f)
 
         return UserInfo(
             gender = Gender.valueOf(genderString ?: Gender.MALE.name),
