@@ -1,4 +1,4 @@
-package com.matikano.caloriestracker.ui.theme
+package com.matikano.core_ui
 
 import androidx.compose.ui.graphics.Color
 

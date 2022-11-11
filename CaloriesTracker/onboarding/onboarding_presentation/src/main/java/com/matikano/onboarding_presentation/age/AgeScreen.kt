@@ -2,29 +2,19 @@ package com.matikano.onboarding_presentation.age
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Female
-import androidx.compose.material.icons.filled.Male
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewModelScope
 import com.matikano.core.util.UiEvent
 import com.matikano.core_ui.LocalSpacing
 import com.matikano.core.R
-import com.matikano.core.domain.model.Gender
-import com.matikano.core.navigation.Screens
 import com.matikano.onboarding_presentation.components.OnBoardingTopBar
-import com.matikano.onboarding_presentation.components.SelectableButton
 import com.matikano.onboarding_presentation.components.UnitTextField
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @Composable
 fun AgeScreen(

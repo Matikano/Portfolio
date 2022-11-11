@@ -1,8 +1,5 @@
 package com.matikano.onboarding_presentation.summary.components
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CalendarToday
-import androidx.compose.material.icons.filled.Height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.matikano.core.R

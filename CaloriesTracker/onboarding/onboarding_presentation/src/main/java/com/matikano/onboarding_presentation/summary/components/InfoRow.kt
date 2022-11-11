@@ -1,14 +1,11 @@
 package com.matikano.onboarding_presentation.summary.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.platform.LocalContext
 import com.matikano.core.util.UiText

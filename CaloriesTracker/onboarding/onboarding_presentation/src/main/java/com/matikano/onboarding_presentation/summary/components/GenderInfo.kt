@@ -1,15 +1,11 @@
 package com.matikano.onboarding_presentation.summary.components
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Female
-import androidx.compose.material.icons.filled.Male
-import androidx.compose.material.icons.filled.Transgender
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.matikano.core.R
 import com.matikano.core.domain.model.Gender
 import com.matikano.core.util.UiText
-import java.util.Locale
+import com.matikano.core.util.extension.capitalizeEnum
 
 
 @Composable
@@ -20,9 +16,6 @@ fun GenderInfo(
     InfoRow(
         modifier = modifier,
         title = UiText.StringResource(R.string.gender),
-        info = gender.name.lowercase().replaceFirstChar {
-            if (it.isLowerCase()) it.titlecase(Locale.ROOT)
-            else it.toString()
-        },
+        info = gender.name.capitalizeEnum(),
     )
 }

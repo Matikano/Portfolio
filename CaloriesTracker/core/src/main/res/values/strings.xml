@@ -71,4 +71,9 @@
     <string name="confirm">Confirm</string>
     <string name="back">Back</string>
     <string name="personal_info">Check your personal info!</string>
+    <string name="navigate_back">navigate back</string>
+    <string name="settings">settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="reinit_dialog_title">Your goal</string>
+    <string name="reinit_dialog_message">Your current calories goal is calculated based on personal info provided during OnBoarding process.\nIt considers your gender, age, weight, height, goal type and activity level. \n\nDo you want to change your personal info? (You will have to go through OnBoarding process once again)</string>
 </resources>

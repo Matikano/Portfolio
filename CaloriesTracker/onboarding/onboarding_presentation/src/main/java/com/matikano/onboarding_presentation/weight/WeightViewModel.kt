@@ -9,7 +9,7 @@ import com.matikano.core.util.UiEvent
 import com.matikano.core.util.UiText
 import com.matikano.onboarding_domain.use_case.weight.WeightUseCases
 import com.matikano.core.R
-import com.matikano.core.navigation.Screens
+import com.matikano.core_ui.navigation.Screen
 import javax.inject.Inject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -45,7 +45,7 @@ class WeightViewModel @Inject constructor (
                     return@launch
                 }
                 useCases.saveWeight(weight)
-                _uiEvent.send(UiEvent.Navigate(Screens.GOAL))
+                _uiEvent.send(UiEvent.Navigate(Screen.Goal.navigationRoute))
             }
             is WeightEvent.OnWeightChange -> {
                 if(state.weight.length <= 5) {

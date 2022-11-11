@@ -16,10 +16,10 @@ interface Preferences {
     fun saveCarbRatio(ratio: Float)
     fun saveProteinRatio(ratio: Float)
     fun saveFatRatio(ratio: Float)
-    fun saveOnboarding(onboarding: Boolean)
+    fun saveOnBoarding(onBoarding: Boolean)
 
     fun loadUserInfo(): UserInfo
-    fun needsOnboarding(): Boolean
+    fun loadOnBoarding(): Boolean
 
     companion object {
         const val KEY_GENDER = "gender"
@@ -31,6 +31,6 @@ interface Preferences {
         const val KEY_CARBS_RATIO = "carbsRatio"
         const val KEY_PROTEIN_RATIO = "proteinRatio"
         const val KEY_FAT_RATIO = "fatRatio"
-        const val KEY_ONBOARDING = "onboarding"
+        const val KEY_ON_BOARDING = "onBoarding"
     }
 }

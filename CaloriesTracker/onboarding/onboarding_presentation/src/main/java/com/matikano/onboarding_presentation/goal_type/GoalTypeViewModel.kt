@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.matikano.core.navigation.Screens
+import com.matikano.core_ui.navigation.Screen
 import com.matikano.core.util.UiEvent
 import com.matikano.onboarding_domain.use_case.goal_type.GoalTypeUseCases
 import javax.inject.Inject
@@ -40,7 +40,7 @@ class GoalTypeViewModel @Inject constructor (
 
             is GoalTypeEvent.OnNextClick -> viewModelScope.launch {
                 useCases.saveGoalType(state.goalType)
-                _uiEvent.send(UiEvent.Navigate(Screens.ACTIVITY))
+                _uiEvent.send(UiEvent.Navigate(Screen.Activity.navigationRoute))
             }
 
             is GoalTypeEvent.OnNavigateBackClick -> viewModelScope.launch {

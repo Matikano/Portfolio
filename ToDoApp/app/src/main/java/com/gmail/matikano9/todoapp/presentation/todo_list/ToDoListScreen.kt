@@ -65,9 +65,7 @@ fun ToDoListScreen(
         topBar = {
             ListAppBar(
                 state,
-                onEvent = { event ->
-                    viewModel.onEvent(event)
-                }
+                onEvent = viewModel::onEvent
             )
         },
         floatingActionButton = {

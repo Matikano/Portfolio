@@ -6,6 +6,6 @@ class SaveOnBoardingNeededUseCase(
     private val preferences: Preferences
 ) {
     suspend operator fun invoke(onBoarding: Boolean) {
-        preferences.saveOnboarding(onBoarding)
+        preferences.saveOnBoarding(onBoarding)
     }
 }

@@ -1,9 +1,8 @@
 package com.matikano.onboarding_domain.use_case.nutrients_goal
 
-import com.matikano.core.util.ValidationResult
 import com.matikano.core.R
 import com.matikano.core.util.UiText
-import javax.inject.Inject
+import com.matikano.core.util.ValidationResult
 
 class ValidateNutrientsUseCase {
 
@@ -11,8 +10,8 @@ class ValidateNutrientsUseCase {
         carbsString: String,
         proteinString: String,
         fatString: String,
-    ): ValidationResult  {
-        val errorEmptyValue =  ValidationResult.Error(UiText.StringResource(R.string.error_empty_values))
+    ): ValidationResult {
+        val errorEmptyValue = ValidationResult.Error(UiText.StringResource(R.string.error_empty_values))
 
         val carbs: Int = carbsString.toIntOrNull() ?: return errorEmptyValue
         val proteins: Int = proteinString.toIntOrNull() ?: return errorEmptyValue

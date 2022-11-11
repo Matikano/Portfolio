@@ -65,9 +65,9 @@ class DefaultPreferences @Inject constructor(
             .apply()
     }
 
-    override fun saveOnboarding(onboarding: Boolean) {
+    override fun saveOnBoarding(onBoarding: Boolean) {
         sharedPref.edit()
-            .putBoolean(Preferences.KEY_ONBOARDING, onboarding)
+            .putBoolean(Preferences.KEY_ON_BOARDING, onBoarding)
             .apply()
     }
 
@@ -95,7 +95,7 @@ class DefaultPreferences @Inject constructor(
         )
     }
 
-    override fun needsOnboarding(): Boolean =
-        sharedPref.getBoolean(Preferences.KEY_ONBOARDING, true)
+    override fun loadOnBoarding(): Boolean =
+        sharedPref.getBoolean(Preferences.KEY_ON_BOARDING, true)
 
 }

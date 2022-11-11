@@ -14,8 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.matikano.core_ui.LocalSpacing
 import com.matikano.core.R
-import com.matikano.core.navigation.Screens
 import com.matikano.core.util.UiEvent
+import com.matikano.core_ui.navigation.Screen
 
 @Composable
 fun WelcomeScreen(
@@ -37,7 +37,7 @@ fun WelcomeScreen(
         )
         Button(
             onClick = {
-                onNavigate(UiEvent.Navigate(Screens.GENDER))
+                onNavigate(UiEvent.Navigate(Screen.Gender.navigationRoute))
             },
             modifier = Modifier
                 .fillMaxWidth()

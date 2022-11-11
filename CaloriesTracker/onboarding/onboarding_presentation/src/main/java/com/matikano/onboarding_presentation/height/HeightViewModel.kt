@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.matikano.core.util.UiEvent
 import com.matikano.core.util.UiText
 import com.matikano.core.R
-import com.matikano.core.navigation.Screens
+import com.matikano.core_ui.navigation.Screen
 import com.matikano.onboarding_domain.use_case.height.HeightUseCases
 import javax.inject.Inject
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -52,7 +52,7 @@ class HeightViewModel @Inject constructor (
                     return@launch
                 }
                 useCases.saveHeight(height)
-                _uiEvent.send(UiEvent.Navigate(Screens.WEIGHT))
+                _uiEvent.send(UiEvent.Navigate(Screen.Weight.navigationRoute))
             }
             is HeightEvent.OnNavigateBackClick -> viewModelScope.launch {
                 _uiEvent.send(UiEvent.PopBackStack)

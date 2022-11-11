@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2022-11-08
+### Added
+* Implementation of `TrackerOverviewScreen` with all respective classes (`TrackerOverviewState`, `TrackerOverviewEvent`, `TrackerOverviewViewModel`)
+* All of TrackerOverview necessary components (`AddMealButton`, `DaySelector`, `ExpandableMeal`, `NutrientBarInfo`, `NutrientInfo`, `NutrientsBar`, `NutrientsHeader`, `TrackedFoodItem`)
+* Helper UiState class `Meal`
+* Implementation of `SearchScreen` with all respective classes (`SearchState`, `SearchEvent`, `SearchViewModel`)
+* All of Search necessary components (`SearchTextField`, `SearchTopBar`, `TrackableFoodItem`)
+* Mutual components (`DisplayAlertDialog`)
+* Goal Info dialog in `TrackerOverviewScreen` to show user info how his calories goal is calculated and provide an option to change it (go through OnBoarding process again)
+* Screenshots of app in `README.md`
+
+### Changed
+* Bugfixes for some components and their behaviour (in `TrackerOverviewViewModel` changed the way how `refreshFoods()` function works - it now collapses all meals by default)
+* Redesigned Screens object - changed it to Sealed class with `route`, `navigationRoute` and `navArgs` values so navigation in `MainActivity` is more clear
+* Moved `Dimensions.kt` to `core-ui` module and added const values in it to provide all sp, dp, shape, size, etc values for different components across the app
+
 ## [0.2.0] - 2022-11-08
 
 ### Added

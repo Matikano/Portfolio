@@ -1,17 +1,14 @@
 package com.matikano.onboarding_presentation.age
 
-import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.matikano.core.domain.preferences.Preferences
-import com.matikano.core.domain.use_case.FilterOutDigitsUseCase
 import com.matikano.core.util.UiEvent
 import com.matikano.core.util.UiText
 import com.matikano.core.R
-import com.matikano.core.navigation.Screens
+import com.matikano.core_ui.navigation.Screen
 import com.matikano.onboarding_domain.use_case.age.AgeUseCases
 import javax.inject.Inject
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -55,7 +52,7 @@ class AgeViewModel @Inject constructor (
                    return@launch
                }
                 useCases.saveAge(age)
-                _uiEvent.send(UiEvent.Navigate(Screens.HEIGHT))
+                _uiEvent.send(UiEvent.Navigate(Screen.Height.navigationRoute))
             }
             is AgeEvent.OnNavigateBackClick -> viewModelScope.launch {
                 _uiEvent.send(UiEvent.PopBackStack)
