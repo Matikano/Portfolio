@@ -5,7 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.3.0] - 2022-11-08
+## [1.0.1] - 2022-11-12
+
+### Changed
+* Changed arrangement of `GoalScreen` and `ActivityScreen` `SelectableButtons` to be inside `FlowRow` (overflowing items that do not fit in rows width will be placed below in a new row)
+* Moved all Ui Theme specific classes from `app` module to `core-ui` and adjusted imports according to that change
+* Changed some Composable components to have their text/content color dependant on SystemColor setting (made them to get color from `MaterialTheme.colors`) 
+* Code clean up (not used imports, etc.)
+
+
+## [1.0.0] - 2022-11-11
 ### Added
 * Implementation of `TrackerOverviewScreen` with all respective classes (`TrackerOverviewState`, `TrackerOverviewEvent`, `TrackerOverviewViewModel`)
 * All of TrackerOverview necessary components (`AddMealButton`, `DaySelector`, `ExpandableMeal`, `NutrientBarInfo`, `NutrientInfo`, `NutrientsBar`, `NutrientsHeader`, `TrackedFoodItem`)

@@ -1,8 +1,10 @@
 package com.matikano.tracker_presentation.tracker_overview
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -10,7 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.matikano.core.util.UiEvent
-import com.matikano.core_ui.LocalSpacing
+import com.matikano.core_ui.theme.LocalSpacing
 import com.matikano.core.R
 import com.matikano.tracker_presentation.compontnts.DisplayAlertDialog
 import com.matikano.tracker_presentation.tracker_overview.components.*
@@ -49,6 +51,7 @@ fun TrackerOverviewScreen(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colors.background)
             .padding(bottom = spacing.spaceMedium)
     ) {
         item {

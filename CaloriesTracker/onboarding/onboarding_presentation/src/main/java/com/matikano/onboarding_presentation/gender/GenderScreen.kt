@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.matikano.core.util.UiEvent
-import com.matikano.core_ui.LocalSpacing
+import com.matikano.core_ui.theme.LocalSpacing
 import com.matikano.core.R
 import com.matikano.core.domain.model.Gender
 import com.matikano.onboarding_presentation.components.OnBoardingTopBar

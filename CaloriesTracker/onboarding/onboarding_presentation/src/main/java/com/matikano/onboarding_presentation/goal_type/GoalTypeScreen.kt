@@ -15,10 +15,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
+import com.google.accompanist.flowlayout.FlowMainAxisAlignment
+import com.google.accompanist.flowlayout.FlowRow
 import com.matikano.core.R
 import com.matikano.core.domain.model.GoalType
 import com.matikano.core.util.UiEvent
-import com.matikano.core_ui.LocalSpacing
+import com.matikano.core_ui.theme.LocalSpacing
 import com.matikano.onboarding_presentation.components.OnBoardingTopBar
 import com.matikano.onboarding_presentation.components.SelectableButton
 import kotlinx.coroutines.flow.collect
@@ -73,7 +76,14 @@ fun GoalScreen(
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(spacing.spaceMedium))
-                Row {
+                FlowRow (
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    mainAxisAlignment = FlowMainAxisAlignment.Center,
+                    mainAxisSpacing = spacing.spaceSmall,
+                    crossAxisAlignment = FlowCrossAxisAlignment.Center,
+                    crossAxisSpacing = spacing.spaceMedium
+                ) {
                     SelectableButton(
                         text = stringResource(id = R.string.lose),
                         isSelected = state.goalType == GoalType.LOSE_WEIGHT,
@@ -84,7 +94,6 @@ fun GoalScreen(
                         },
                         icon = Icons.Default.SouthEast
                     )
-                    Spacer(modifier = Modifier.width(spacing.spaceSmall))
                     SelectableButton(
                         text = stringResource(id = R.string.keep),
                         isSelected = state.goalType == GoalType.KEEP_WEIGHT,
@@ -95,7 +104,6 @@ fun GoalScreen(
                         },
                         icon = Icons.Default.HorizontalRule
                     )
-                    Spacer(modifier = Modifier.width(spacing.spaceSmall))
                     SelectableButton(
                         text = stringResource(id = R.string.gain),
                         isSelected = state.goalType == GoalType.GAIN_WEIGHT,

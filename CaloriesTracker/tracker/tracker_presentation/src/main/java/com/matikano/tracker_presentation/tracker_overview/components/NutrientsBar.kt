@@ -1,22 +1,16 @@
 package com.matikano.tracker_presentation.tracker_overview.components
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
-import com.matikano.caloriestracker.ui.theme.circular
-import com.matikano.caloriestracker.ui.theme.rounderCorner
 import com.matikano.core.domain.model.Nutrients
-import com.matikano.core_ui.*
+import com.matikano.core_ui.theme.*
 
 @Composable
 fun NutrientsBar(

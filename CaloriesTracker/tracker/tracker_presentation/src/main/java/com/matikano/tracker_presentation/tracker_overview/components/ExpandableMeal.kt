@@ -16,9 +16,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.layout.*
-import com.matikano.core_ui.LocalSpacing
+import com.matikano.core_ui.theme.LocalSpacing
 import com.matikano.core.R
-import com.matikano.core_ui.ExpandableMeal
+import com.matikano.core_ui.theme.ExpandableMeal
 import com.matikano.core_ui.components.UnitDisplay
 import com.matikano.tracker_presentation.tracker_overview.Meal
 import com.matikano.tracker_presentation.tracker_overview.TrackerOverviewEvent
@@ -61,7 +61,8 @@ fun ExpandableMeal(
                 ) {
                     Text(
                         text = meal.name.asString(context),
-                        style = MaterialTheme.typography.h3
+                        style = MaterialTheme.typography.h3,
+                        color = MaterialTheme.colors.onBackground
                     )
                     Icon(
                         imageVector = if (meal.expanded) { 
@@ -70,6 +71,7 @@ fun ExpandableMeal(
                         contentDescription = if (meal.expanded) {
                             stringResource(id = R.string.collapse)
                         } else  stringResource(id = R.string.extend),
+                        tint = MaterialTheme.colors.onBackground
                     )
                 }
                 Spacer(modifier = Modifier.height(spacing.spaceSmall))

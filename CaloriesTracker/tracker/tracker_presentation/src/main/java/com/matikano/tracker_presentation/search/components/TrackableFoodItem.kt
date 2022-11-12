@@ -25,14 +25,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.matikano.core_ui.LocalSpacing
+import com.matikano.core_ui.theme.LocalSpacing
 import com.matikano.core.R
-import com.matikano.core_ui.TrackableFoodItem
+import com.matikano.core_ui.theme.TrackableFoodItem
 import com.matikano.tracker_domain.model.MealType
 import com.matikano.tracker_presentation.search.SearchEvent
 import com.matikano.tracker_presentation.search.TrackableFoodUiState
@@ -152,6 +153,9 @@ fun TrackableFoodItem(
                         onValueChange = { amount ->
                             onEvent(SearchEvent.OnAmountForFoodChange(amount, food))
                         },
+                        textStyle =  TextStyle.Default.copy(
+                            color = MaterialTheme.colors.onBackground
+                        ),
                         keyboardOptions = KeyboardOptions(
                             imeAction = if(trackableFoodUiState.amount.isNotBlank()) {
                                 ImeAction.Done

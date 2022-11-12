@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.matikano.core.util.UiEvent
 import com.matikano.core.R
-import com.matikano.core_ui.LocalSpacing
+import com.matikano.core_ui.theme.LocalSpacing
 import com.matikano.tracker_domain.model.MealType
 import com.matikano.tracker_presentation.search.components.SearchTextField
 import com.matikano.tracker_presentation.search.components.SearchTopBar

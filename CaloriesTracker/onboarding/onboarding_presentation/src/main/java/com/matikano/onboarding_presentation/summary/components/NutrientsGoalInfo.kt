@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.res.stringResource
 import com.matikano.core.R
-import com.matikano.core_ui.LocalSpacing
+import com.matikano.core_ui.theme.LocalSpacing
 
 @Composable
 fun NutrientsGoalInfo(

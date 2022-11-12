@@ -7,8 +7,8 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.matikano.caloriestracker.extensions.navigate
-import com.matikano.caloriestracker.ui.theme.CaloriesTrackerTheme
+import com.matikano.core_ui.extensions.navigate
+import com.matikano.core_ui.theme.CaloriesTrackerTheme
 import com.matikano.core.domain.preferences.Preferences
 import com.matikano.core_ui.navigation.Screen
 import com.matikano.onboarding_presentation.activity.ActivityScreen

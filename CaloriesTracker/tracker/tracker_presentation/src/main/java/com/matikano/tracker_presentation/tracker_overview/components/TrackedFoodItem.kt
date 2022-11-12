@@ -19,8 +19,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.matikano.core_ui.LocalSpacing
-import com.matikano.core_ui.TrackedFoodItem
+import com.matikano.core_ui.theme.LocalSpacing
+import com.matikano.core_ui.theme.TrackedFoodItem
 import com.matikano.tracker_domain.model.TrackedFood
 import com.matikano.core.R
 import com.matikano.tracker_presentation.tracker_overview.TrackerOverviewEvent
@@ -74,7 +74,8 @@ fun TrackedFoodItem(
                 text = trackedFood.name,
                 style = MaterialTheme.typography.body1,
                 overflow = TextOverflow.Ellipsis,
-                maxLines = TrackedFoodItem.itemNameMaxLines
+                maxLines = TrackedFoodItem.itemNameMaxLines,
+                color = MaterialTheme.colors.onBackground
             )
             Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
             Text(
@@ -83,7 +84,8 @@ fun TrackedFoodItem(
                     trackedFood.amount,
                     trackedFood.calories
                 ),
-                style = MaterialTheme.typography.body2
+                style = MaterialTheme.typography.body2,
+                color = MaterialTheme.colors.onBackground
             )
         }
         Spacer(modifier = Modifier.width(spacing.spaceMedium))
@@ -95,6 +97,7 @@ fun TrackedFoodItem(
             Icon(
                 imageVector = Icons.Default.Close,
                 contentDescription = stringResource(id = R.string.delete),
+                tint = MaterialTheme.colors.onBackground,
                 modifier = Modifier
                     .align(Alignment.End)
                     .clickable {

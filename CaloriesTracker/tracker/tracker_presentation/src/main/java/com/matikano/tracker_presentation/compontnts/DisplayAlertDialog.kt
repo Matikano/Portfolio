@@ -6,8 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.matikano.core.R
-import com.matikano.core_ui.defaultBorderStroke
-import kotlinx.coroutines.NonCancellable.cancel
+import com.matikano.core_ui.theme.defaultBorderStroke
 
 @Composable
 fun DisplayAlertDialog(

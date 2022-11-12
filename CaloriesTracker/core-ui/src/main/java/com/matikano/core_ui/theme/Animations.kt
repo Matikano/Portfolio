@@ -1,4 +1,4 @@
-package com.matikano.core_ui
+package com.matikano.core_ui.theme
 
 import androidx.compose.animation.core.tween
 

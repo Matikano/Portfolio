@@ -1,5 +1,6 @@
 package com.matikano.onboarding_presentation.welcome
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.matikano.core_ui.LocalSpacing
+import com.matikano.core_ui.theme.LocalSpacing
 import com.matikano.core.R
 import com.matikano.core.util.UiEvent
 import com.matikano.core_ui.navigation.Screen
@@ -25,6 +26,7 @@ fun WelcomeScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colors.background)
             .padding(spacing.spaceMedium),
       
     ) {
@@ -32,7 +34,9 @@ fun WelcomeScreen(
             modifier = Modifier
                 .align(Alignment.Center),
             text = stringResource(id = R.string.welcome_text),
-            style = MaterialTheme.typography.h1,
+            style = MaterialTheme.typography.h1.copy(
+                color = MaterialTheme.colors.onBackground
+            ),
             textAlign = TextAlign.Center
         )
         Button(

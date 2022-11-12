@@ -1,4 +1,4 @@
-package com.matikano.caloriestracker.extensions
+package com.matikano.core_ui.extensions
 
 import androidx.navigation.NavController
 import com.matikano.core.util.UiEvent

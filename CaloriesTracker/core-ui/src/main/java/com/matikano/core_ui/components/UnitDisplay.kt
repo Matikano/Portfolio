@@ -10,9 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.sp
-import com.matikano.core_ui.LocalSpacing
-import com.matikano.core_ui.UnitDisplay
+import com.matikano.core_ui.theme.LocalSpacing
+import com.matikano.core_ui.theme.UnitDisplay
 
 @Composable
 fun UnitDisplay(

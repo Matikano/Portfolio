@@ -23,11 +23,12 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import com.matikano.core.R
-import com.matikano.core_ui.LocalSpacing
-import com.matikano.core_ui.SearchTextField
+import com.matikano.core_ui.theme.LocalSpacing
+import com.matikano.core_ui.theme.SearchTextField
 import com.matikano.tracker_presentation.search.SearchEvent
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -50,6 +51,9 @@ fun SearchTextField(
             onValueChange = { value ->
                 onEvent(SearchEvent.OnQueryChange(value))
             },
+            textStyle =  TextStyle.Default.copy(
+                color = MaterialTheme.colors.onBackground
+            ),
             singleLine = true,
             keyboardActions = KeyboardActions (
                 onSearch = {

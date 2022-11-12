@@ -13,14 +13,13 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.matikano.core.R
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.ui.text.font.FontWeight
-import com.matikano.core_ui.NutrientsHeader
-import com.matikano.core_ui.basicBarAnimation
+import com.matikano.core_ui.theme.NutrientsHeader
 import com.matikano.core_ui.components.UnitDisplay
+import com.matikano.core_ui.theme.basicBarAnimation
 
 @Composable
 fun NutrientBarInfo(

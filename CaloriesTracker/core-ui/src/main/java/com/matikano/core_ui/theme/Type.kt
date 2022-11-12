@@ -1,4 +1,4 @@
-package com.matikano.caloriestracker.ui.theme
+package com.matikano.core_ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
