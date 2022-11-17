@@ -1,5 +1,6 @@
 package com.matikano.tracker_data.repository
 
+import com.matikano.core.domain.model.Nutrients
 import com.matikano.tracker_data.local.TrackerDao
 import com.matikano.tracker_data.mapper.toTrackableFood
 import com.matikano.tracker_data.mapper.toTrackedFood
@@ -29,9 +30,19 @@ class TrackerRepositoryImpl @Inject constructor(
             pageSize = pageSize
         )
         Result.success(
-            searchDto.products.mapNotNull { product ->
-                product.toTrackableFood()
-            }
+            searchDto.products
+                .filter {
+                    val calories =
+                        it.nutriments.carbohydrates100g * Nutrients.CARBS.kcalPerGramRatio +
+                        it.nutriments.proteins100g * Nutrients.PROTEIN.kcalPerGramRatio +
+                        it.nutriments.fat100g * Nutrients.FAT.kcalPerGramRatio
+                    val lowerBound = calories * 0.99f
+                    val upperBound = calories * 1.01f
+                    it.nutriments.energyKcal100g in (lowerBound..upperBound)
+                }
+                .mapNotNull { product ->
+                    product.toTrackableFood()
+                }
         )
     } catch (e: Exception){
         e.printStackTrace()
