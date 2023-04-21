@@ -1,6 +1,6 @@
 # Portfolio
  Android projects representing my skills in various technologies and best practices like:
- - MVVM & MVI
+ - MVVM
  - Clean Architecture
  - ROOM Database
  - Retrofit
